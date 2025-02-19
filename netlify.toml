@@ -1,7 +1,6 @@
 [build]
-  base = "frontend"  # Modifica questa sezione con la cartella giusta, se la tua cartella del frontend è diversa
-  publish = "frontend"  # La cartella dove Netlify pubblicherà i file
-  command = "echo 'No build command'"  # Comando di build, se non serve puoi lasciarlo come questo
+  command = "echo 'No build command'"  # Non è necessaria alcuna build specifica per il tuo caso
+  publish = "."  # Pubblica dalla directory corrente (root del progetto)
 
 [[redirects]]
   from = "/api/*"
