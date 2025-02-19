@@ -1,7 +1,7 @@
 // Funzione per ottenere i giochi dal server
 async function getGames() {
     try {
-        const response = await fetch('https://appgis.onrender.com/api/giochi');  // Usa l'URL del tuo server live
+        const response = await fetch('https://appGis.onrender.com/api/giochi');  // Usa l'URL del tuo server live
         let giochi = await response.json();
 
         // Ordina i giochi per nome in ordine alfabetico
