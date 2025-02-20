@@ -28,4 +28,4 @@ async function getGames() {
 }
 
 // Carica i giochi quando la pagina è pronta
-window.onload = getGames;
+document.addEventListener('DOMContentLoaded', getGames);
