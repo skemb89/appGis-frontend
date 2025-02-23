@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profilo Utente</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    .logout-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #d9534f;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="greeting">Caricamento...</h1>
+    <a href="#" id="logout" class="logout-btn">Logout</a>
+  </div>
+
+  <script>
+    // Funzione per caricare il profilo utente
+    async function loadProfile() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        // Se non esiste un token, reindirizza alla pagina di login
+        window.location.href = 'index.html';
+        return;
+      }
+
+      try {
+        // Effettua la richiesta GET all'endpoint protetto per il profilo
+        const response = await fetch('https://appgis.onrender.com/api/auth/profile', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          }
+        });
+
+        if (response.status === 401) {
+          alert('Sessione scaduta o token non valido. Effettua nuovamente il login.');
+          localStorage.removeItem('token');
+          window.location.href = 'index.html';
+          return;
+        }
+
+        const data = await response.json();
+        // Visualizza il messaggio "ciao <username>"
+        document.getElementById('greeting').textContent = data.message;
+      } catch (error) {
+        console.error('Errore nel caricamento del profilo:', error);
+      }
+    }
+
+    // Gestione del logout
+    document.getElementById('logout').addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.removeItem('token');
+      window.location.href = 'index.html';
+    });
+
+    // Carica il profilo al caricamento della pagina
+    window.onload = loadProfile;
+  </script>
+</body>
+</html>
