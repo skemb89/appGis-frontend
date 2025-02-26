@@ -4,31 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista Giochi</title>
-    <!-- Modifica il percorso del CSS per riflettere la cartella 'css' -->
-    <link rel="stylesheet" href="css/styles.css">  
+    <link rel="stylesheet" href="css/styles.css">  <!-- Stile principale -->
 </head>
 <body>
 
-    <h1>Lista dei Giochi</h1>
-    <table id="gamesTable">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Tipologia</th>
-                <th>Durata Media (min)</th>
-                <th>Difficoltà</th>
-                <th>Giocatori Min</th>
-                <th>Giocatori Max</th>
-                <th>Proprietario</th>
-                <th>Posizione</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- I giochi verranno caricati qui -->
-        </tbody>
-    </table>
+    <!-- Sidebar per la navigazione -->
+    <div class="sidebar">
+        <h2>Menù</h2>
+        
+        <a href="profilo.html">Profilo</a></li>
+        <a href="modifica_profilo.html">Modifica Profilo</a></li>
+        <a href="lista-giochi.html">Lista Giochi</a></li>
+        <a href="statistiche.html">Statistiche</a></li>
+        <a href="#" id="logout">Logout</a></li>
+        
+    </div>
 
-    <!-- Modifica il percorso dello script JS per riflettere la cartella 'js' -->
+    <!-- Contenitore principale con la tabella -->
+    <div class="main-content">
+        <div class="container">
+            <h1>Lista dei Giochi</h1>
+            <div class="table-container">
+                <table id="gamesTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tipologia</th>
+                            <th>Durata Media (min)</th>
+                            <th>Difficoltà</th>
+                            <th>Giocatori Min</th>
+                            <th>Giocatori Max</th>
+                            <th>Proprietario</th>
+                            <th>Posizione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- I giochi verranno caricati qui tramite JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inclusione dello script per il caricamento dei giochi -->
     <script src="js/script-giochi.js"></script>  
+    <script src="js/profile.js"></script> <!-- Script per il logout -->
 </body>
 </html>

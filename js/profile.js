@@ -9,25 +9,19 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  // Mostra direttamente il saluto con il nome utente salvato
-  if (username) {
-    greetingElement.textContent = `Ciao ${username}`;
-  } else {
-    greetingElement.textContent = "Ciao!";
-  }
+    // Mostra il saluto con il nome utente (se presente)
+    if (greetingElement && username) {
+      greetingElement.textContent = `Ciao ${username}`;
+    }
 
   // Logout
-  document.getElementById("logout").addEventListener("click", function (e) {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    window.location.href = "index.html";
-  });
-
-  //lancio pagina lista giochi
-  document.getElementById("viewGames").addEventListener("click", function () {
-    window.location.href = "lista-giochi.html";
-  });
-
-
+  const logoutButton = document.getElementById("logout");
+  if (logoutButton) {
+    logoutButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      window.location.href = "index.html";
+    });
+  }
 });

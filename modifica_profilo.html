@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modifica Profilo</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <a href="profilo.html">Profilo</a>
+    <a href="lista-giochi.html">Lista Giochi</a>
+    <a href="statistiche.html">Statistiche</a>
+  </div>
+
+  <div class="main-content">
+    <div class="container">
+      <h2>Modifica Profilo</h2>
+      <form id="profileForm">
+        <label for="username">Nuovo Username:</label>
+        <input type="text" id="username" required>
+
+        <label for="password">Nuova Password:</label>
+        <input type="password" id="password">
+
+        <button type="submit" class="btn">Salva Modifiche</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/modifica_profilo.js"></script>
+</body>
+</html>

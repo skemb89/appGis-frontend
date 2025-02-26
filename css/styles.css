@@ -1,62 +1,121 @@
-/* Generale */
+/* Stile generale della pagina */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #f4f4f4;
+    /* Utilizziamo min-height invece di height per permettere l'espansione in verticale */
+    min-height: 100vh;
     margin: 0;
-    padding: 0;
+    display: flex;
 }
 
-h1 {
+/* Stile del menu laterale */
+.sidebar {
+    width: 250px;
+    background-color: #343a40;
+    padding-top: 20px;
+    color: white;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.sidebar h2 {
     text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #007bff;
+}
+
+/* Contenitore principale */
+.main-content {
+    margin-left: 250px;
+    flex: 1;
+    /* Impostiamo l'allineamento a flex-start per evitare il centramento verticale */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    /* Aggiungiamo overflow-y per gestire contenuti alti */
+    overflow-y: auto;
+}
+
+/* Box centrale */
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 100%;
+    /* Permettiamo al container di espandersi in verticale */
+    max-height: 100%;
+}
+
+/* Stili dei titoli */
+h1, h2 {
     color: #333;
-    margin-top: 30px;
 }
 
-/* Stile della tabella */
+/* Stile per i pulsanti */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.logout-btn {
+    background-color: #d9534f;
+}
+
+/* ---------------- */
+/* STILE PER LA TABELLA */
+/* ---------------- */
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto; /* Permette lo scroll orizzontale su schermi piccoli */
+}
+
 table {
-    width: 80%;
-    margin: 20px auto;
+    width: 100%;
     border-collapse: collapse;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    background: #fff;
 }
 
-table th, table td {
+th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
-table th {
-    background-color: #4CAF50;
+th {
+    background-color: #007bff;
     color: white;
+    text-transform: uppercase;
 }
 
-table tr:hover {
+tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Stile delle celle */
-table td {
-    color: #555;
-}
-
-table td:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-/* Responsive: per schermi più piccoli */
-@media screen and (max-width: 768px) {
-    table {
-        width: 100%;
-    }
-
-    table th, table td {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    h1 {
-        font-size: 24px;
+@media (max-width: 600px) {
+    th, td {
+      padding: 8px;
     }
 }
