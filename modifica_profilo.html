@@ -15,35 +15,42 @@
     <span class="bar"></span>
   </button>
   
- <!-- Sidebar con il menu di navigazione -->
-<div class="sidebar" id="sidebar">
-  <!-- Nome dell'utente visibile sempre -->
-  <div class="user-info" id="user-info"></div>
+  <!-- Sidebar con il menu di navigazione -->
+  <div class="sidebar" id="sidebar">
+    <!-- Nome dell'utente visibile sempre -->
+    <div class="user-info" id="user-info"></div>
 
-  <!-- Menu -->
-  <ul class="menu-list">
-    <li><a href="profilo.html">Profilo</a></li>
-    <li><a href="modifica_profilo.html">Modifica Profilo</a></li>
-    <li><a href="lista-giochi.html">Lista Giochi</a></li>
-    <li><a href="statistiche.html">Statistiche</a></li>
-    
-  </ul>
+    <!-- Menu -->
+    <ul class="menu-list">
+      <li><a href="profilo.html">Profilo</a></li>
+      <li><a href="modifica_profilo.html">Modifica Profilo</a></li>
+      <li><a href="lista-giochi.html">Lista Giochi</a></li>
+      <li><a href="statistiche.html">Statistiche</a></li>
+    </ul>
 
-  <!-- Logout -->
-  <button id="logout" class="logout-btn">Logout</button>
-</div>
-
+    <!-- Logout -->
+    <button id="logout" class="logout-btn">Logout</button>
+  </div>
 
   <!-- Contenuto principale -->
   <div class="main-content">
     <div class="container">
       <h2>Modifica Profilo</h2>
       <form id="profileForm">
-        <label for="username">Nuovo Username:</label>
-        <input type="text" id="username" required>
+        <div>
+          <label for="current-username">Username Attuale:</label>
+          <span id="current-username">Caricamento...</span>
+        </div>
+        
+        <div>
+          <label for="current-giocatore">Giocatore Associato:</label>
+          <span id="current-giocatore">Caricamento...</span>
+        </div>
 
-        <label for="password">Nuova Password:</label>
-        <input type="password" id="password">
+        <div>
+          <label for="password">Nuova Password:</label>
+          <input type="password" id="password">
+        </div>
 
         <button type="submit" class="btn">Salva Modifiche</button>
       </form>
