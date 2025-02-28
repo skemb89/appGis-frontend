@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   
     try {
       // Eseguiamo la richiesta per ottenere il profilo dell'utente
-      const response = await fetch('/api/auth/profile2', {
+      const response = await fetch('https://appgis.onrender.com/api/auth/profile2', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`, // Aggiungi il token nella richiesta
