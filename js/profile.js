@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("token");
-  const username = localStorage.getItem("username");
+  const username = localStorage.getItem("username") || "Utente";
+  document.getElementById("user-info").textContent = username;
   const greetingElement = document.getElementById("greeting");
 
   // Se non c'è un token, rimanda alla pagina di login
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
       greetingElement.textContent = `Ciao ${username}`;
     }
 
+    
   // Logout
   const logoutButton = document.getElementById("logout");
   if (logoutButton) {

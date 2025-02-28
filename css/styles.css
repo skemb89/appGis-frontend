@@ -1,4 +1,4 @@
-/* Stile generale della pagina */
+/* Stile generale */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -7,7 +7,12 @@ body {
     display: flex;
 }
 
-/* Sidebar per desktop */
+/* Stile per il titolo di benvenuto 
+#greeting {
+    margin-top: 50px;  Sposta il titolo più in basso 
+}*/
+
+/* Sidebar */
 .sidebar {
     width: 250px;
     background-color: #343a40;
@@ -19,150 +24,126 @@ body {
     top: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribuisce lo spazio: in alto nome e menu, in basso logout */
     transition: transform 0.3s ease;
 }
 
-/* Mostra il nome dell'utente nella sidebar */
+/* Nome utente nella sidebar */
 .user-info {
-    text-align: center;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 20px;
+    color: white; /* Sempre bianco */
+    padding-bottom: 20px; /* Spazio sotto il nome */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Linea separatrice */
+    text-align: center;
 }
 
-/* Menu di navigazione */
+/* Contenitore del menu */
+.menu-top {
+    flex-grow: 1; /* Fa in modo che il contenuto occupi lo spazio disponibile */
+}
+
+/* Menu */
 .menu-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin-top: 40px;
 }
 
 .menu-list li {
     margin: 15px 0;
 }
 
-.menu-list li a {
+/* Stile uniforme per tutti i link, incluso il Logout */
+.menu-list li a,
+.logout-btn {
     display: block;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 15px; /* Stessa spaziatura per tutti */
     text-decoration: none;
     border-radius: 5px;
-    transition: background 0.3s;
+    transition: background 0.3s, color 0.3s; /* Aggiunto il cambio di colore della scritta */
+    text-align: left;
+    width: calc(100% - 30px); /* Evita che esca fuori dalla sidebar */
 }
 
-.menu-list li a:hover {
+/* Stesso effetto hover per tutti i link */
+.menu-list li a:hover,
+.logout-btn:hover {
     background-color: #007bff;
+    color: white; /* Assicura che il testo rimanga bianco al passaggio del mouse */
 }
 
-/* Pulsante di logout (posizionato in fondo della sidebar) */
+/* Aggiungi altre personalizzazioni, se necessario */
 .logout-btn {
-    background-color: #d9534f;
-    width: 100%;
-    padding: 10px;
-    border: none;
+    font-size: 16px; /* Imposta la stessa dimensione del testo per uniformità */
+    all: unset; /* Resetta tutti gli stili predefiniti */
+    display: block; /* Mantiene il comportamento del link */
+    width: calc(100% - 30px);
+    padding: 10px 15px;
     border-radius: 5px;
-    color: white;
+    text-align: left;
     cursor: pointer;
 }
 
-/* Bottone hamburger, visibile solo su dispositivi piccoli */
+/* Rimuove eventuali effetti di focus */
+.logout-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* Hamburger */
 .hamburger {
     position: fixed;
     top: 15px;
     left: 15px;
     background: transparent;
     border: none;
-    font-size: 2rem;
-    color: #343a40;
     cursor: pointer;
     z-index: 1000;
-    display: none; /* Nascondilo su desktop */
+    display: none;
+    flex-direction: column;
+    gap: 5px;
 }
 
-/* Contenitore principale */
+.hamburger .bar {
+    width: 30px;
+    height: 4px;
+    background-color: #343a40;
+    transition: background-color 0.3s;
+}
+
+.hamburger.active .bar {
+    background-color: white;
+}
+
+/* Contenuto principale */
 .main-content {
-    margin-left: 250px;
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
     padding: 20px;
     overflow-y: auto;
+    transition: margin-left 0.3s ease;
+    margin-left: 250px;
+    padding-left: 70px; /* Aggiunto spazio per evitare che il testo sia troppo vicino */
 }
 
-/* Box centrale */
-.container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-    width: 100%;
-    max-height: 100%;
-}
-
-/* Titoli */
-h1, h2 {
-    color: #333;
-}
-
-/* Pulsanti generici */
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-}
-
-/* Stile per la tabella */
-.table-container {
-    margin-top: 20px;
-    overflow-x: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    background: #fff;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #007bff;
-    color: white;
-    text-transform: uppercase;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
+/* Quando la sidebar è nascosta su mobile */
 @media (max-width: 768px) {
-    /* Mostra il bottone hamburger sui dispositivi piccoli */
     .hamburger {
-        display: block;
+        display: flex;
     }
-    /* La sidebar si nasconde di default su mobile */
+    
     .sidebar {
         transform: translateX(-100%);
     }
+    
     .sidebar.active {
         transform: translateX(0);
     }
+    
     .main-content {
         margin-left: 0;
         padding: 10px;
+        text-align: center; /* Centrare il testo su mobile se serve */
     }
 }

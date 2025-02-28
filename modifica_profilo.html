@@ -8,13 +8,33 @@
 </head>
 <body>
 
-  <div class="sidebar">
-    <h2>Menu</h2>
-    <a href="profilo.html">Profilo</a>
-    <a href="lista-giochi.html">Lista Giochi</a>
-    <a href="statistiche.html">Statistiche</a>
-  </div>
+  <!-- Bottone hamburger per dispositivi mobili -->
+  <button class="hamburger" id="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+  
+ <!-- Sidebar con il menu di navigazione -->
+<div class="sidebar" id="sidebar">
+  <!-- Nome dell'utente visibile sempre -->
+  <div class="user-info" id="user-info"></div>
 
+  <!-- Menu -->
+  <ul class="menu-list">
+    <li><a href="profilo.html">Profilo</a></li>
+    <li><a href="modifica_profilo.html">Modifica Profilo</a></li>
+    <li><a href="lista-giochi.html">Lista Giochi</a></li>
+    <li><a href="statistiche.html">Statistiche</a></li>
+    
+  </ul>
+
+  <!-- Logout -->
+  <button id="logout" class="logout-btn">Logout</button>
+</div>
+
+
+  <!-- Contenuto principale -->
   <div class="main-content">
     <div class="container">
       <h2>Modifica Profilo</h2>
@@ -31,5 +51,7 @@
   </div>
 
   <script src="js/modifica_profilo.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/menu.js"></script>
 </body>
 </html>
