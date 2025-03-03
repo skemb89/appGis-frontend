@@ -9,17 +9,20 @@ async function getGames() {
 
         const tableBody = document.getElementById('gamesTable').getElementsByTagName('tbody')[0];
 
+        // Svuota la tabella prima di riempirla
+        tableBody.innerHTML = "";
+
         // Aggiungi ogni gioco alla tabella
         giochi.forEach(gioco => {
             const row = tableBody.insertRow();
 
             row.insertCell(0).textContent = gioco.nome;
-            row.insertCell(1).textContent = gioco.tipologia;
-            row.insertCell(2).textContent = gioco.durataMedia;
-            row.insertCell(3).textContent = gioco.difficolta;
-            row.insertCell(4).textContent = gioco.giocatoriMin;
-            row.insertCell(5).textContent = gioco.giocatoriMax;
-            row.insertCell(6).textContent = gioco.proprietario;
+            row.insertCell(1).textContent = gioco.tipologia ? gioco.tipologia.nome : 'N/A'; // Mostra il nome della tipologia
+            row.insertCell(2).textContent = gioco.durataMedia || 'N/A';
+            row.insertCell(3).textContent = gioco.difficolta || 'N/A';
+            row.insertCell(4).textContent = gioco.giocatoriMin || 'N/A';
+            row.insertCell(5).textContent = gioco.giocatoriMax || 'N/A';
+            row.insertCell(6).textContent = gioco.proprietario ? gioco.proprietario.nome : 'N/A'; // Mostra il nome del proprietario
             row.insertCell(7).textContent = gioco.posizione || 'N/A';
         });
     } catch (error) {
