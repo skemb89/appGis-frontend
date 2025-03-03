@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     greetingElement.textContent = `Ciao ${username}`;
   }
 
-  // Funzione per ottenere i giochi dell'utente
   async function getUserGames() {
     try {
       const response = await fetch(`https://appgis.onrender.com/api/giochi/giocatore/${userId}`, {
@@ -26,33 +25,40 @@ document.addEventListener("DOMContentLoaded", function () {
           'Authorization': `Bearer ${token}`  // Includi il token di autenticazione
         }
       });
-
+  
       console.log('Response status:', response.status);
-
-      // Verifica che la risposta sia valida
+      const data = await response.json();
+      console.log('Response body:', data);
+  
       if (!response.ok) {
         throw new Error('Errore nel recuperare i giochi');
       }
-
-      const giochi = await response.json();
-      console.log('Response body:', giochi);
-
-      // Mostra i giochi in una tabella
+  
+      const giochi = data;  // Assicurati che `giochi` contenga l'array dei giochi.
+  
       const tableBody = document.getElementById("userGamesTable").getElementsByTagName("tbody")[0];
-
-      // Aggiungi i giochi alla tabella
-      giochi.forEach(gioco => {
+  
+      // Se l'array dei giochi è vuoto, mostra un messaggio nella tabella
+      if (giochi.length === 0) {
         const row = tableBody.insertRow();
-
-        row.insertCell(0).textContent = gioco.nome;
-        row.insertCell(1).textContent = gioco.tipologia.nome;  // Tipologia (nome)
-        row.insertCell(2).textContent = gioco.durataMedia;
-        row.insertCell(3).textContent = gioco.difficolta;
-        row.insertCell(4).textContent = gioco.giocatoriMin;
-        row.insertCell(5).textContent = gioco.giocatoriMax;
-        row.insertCell(6).textContent = gioco.proprietario.nome;  // Proprietario (nome)
-        row.insertCell(7).textContent = gioco.posizione || 'N/A';
-      });
+        row.classList.add("no-data");
+        row.insertCell(0).colSpan = 8;  // Per fare in modo che la riga copra tutte le colonne
+        row.cells[0].textContent = "Nessun gioco disponibile";
+      } else {
+        // Aggiungi i giochi alla tabella
+        giochi.forEach(gioco => {
+          const row = tableBody.insertRow();
+  
+          row.insertCell(0).textContent = gioco.nome;
+          row.insertCell(1).textContent = gioco.tipologia.nome;  // Tipologia (nome)
+          row.insertCell(2).textContent = gioco.durataMedia;
+          row.insertCell(3).textContent = gioco.difficolta;
+          row.insertCell(4).textContent = gioco.giocatoriMin;
+          row.insertCell(5).textContent = gioco.giocatoriMax;
+          row.insertCell(6).textContent = gioco.proprietario.nome;  // Proprietario (nome)
+          row.insertCell(7).textContent = gioco.posizione || 'N/A';
+        });
+      }
     } catch (error) {
       console.error('Errore nel recuperare i giochi dell\'utente:', error);
     }

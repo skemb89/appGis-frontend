@@ -147,3 +147,64 @@ body {
         text-align: center; /* Centrare il testo su mobile se serve */
     }
 }
+
+/* TABELLA */
+/* Stile per la tabella */
+#userGamesTable {
+    width: 100%;
+    border-collapse: collapse; /* Evita la separazione tra le celle */
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 10px; /* Angoli arrotondati per la tabella */
+    overflow: hidden; /* Per evitare che gli angoli arrotondati siano tagliati */
+}
+
+/* Intestazioni della tabella */
+#userGamesTable thead {
+    background-color: #343a40; /* Colore di sfondo che richiama la sidebar */
+    color: white; /* Colore del testo bianco per le intestazioni */
+    text-align: left;
+}
+
+#userGamesTable th {
+    padding: 12px 15px; /* Spaziatura per le intestazioni */
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Righe della tabella */
+#userGamesTable tbody tr {
+    background-color: #f9f9f9; /* Colore di sfondo per le righe */
+    border-bottom: 1px solid #ddd; /* Bordi sottili tra le righe */
+}
+
+#userGamesTable tbody tr:nth-child(even) {
+    background-color: #f1f1f1; /* Colore alternato per le righe */
+}
+
+/* Hover sulle righe della tabella */
+#userGamesTable tbody tr:hover {
+    background-color: #007bff; /* Colore di sfondo al passaggio del mouse */
+    color: white; /* Colore del testo bianco al passaggio del mouse */
+}
+
+/* Celle della tabella */
+#userGamesTable td {
+    padding: 12px 15px; /* Spaziatura per le celle */
+    font-size: 14px;
+    color: #333; /* Colore del testo delle celle */
+}
+
+/* Bordi arrotondati per le celle della tabella */
+#userGamesTable td, #userGamesTable th {
+    border-radius: 10px; /* Angoli arrotondati per ogni cella */
+}
+
+/* Stile per la tabella vuota */
+#userGamesTable tbody tr.no-data td {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+    background-color: #f1f1f1;
+    border: none;
+}
