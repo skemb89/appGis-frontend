@@ -9,8 +9,7 @@ async function getGames() {
 
         const tableBody = document.getElementById('gamesTable').getElementsByTagName('tbody')[0];
 
-        // Svuota la tabella prima di riempirla
-        tableBody.innerHTML = "";
+        
 
         // Aggiungi ogni gioco alla tabella
         giochi.forEach(gioco => {

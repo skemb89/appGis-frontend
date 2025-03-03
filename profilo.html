@@ -14,30 +14,42 @@
     <span class="bar"></span>
   </button>
   
- <!-- Sidebar con il menu di navigazione -->
-<div class="sidebar" id="sidebar">
-  <!-- Nome dell'utente visibile sempre -->
-  <div class="user-info" id="user-info"></div>
-
-  <!-- Menu -->
-  <ul class="menu-list">
-    <li><a href="profilo.html">Profilo</a></li>
-    <li><a href="modifica_profilo.html">Modifica Profilo</a></li>
-    <li><a href="lista-giochi.html">Lista Giochi</a></li>
-    <li><a href="statistiche.html">Statistiche</a></li>
-    
-  </ul>
-
-  <!-- Logout -->
-  <button id="logout" class="logout-btn">Logout</button>
-</div>
-
+  <!-- Sidebar con il menu di navigazione -->
+  <div class="sidebar" id="sidebar">
+    <div class="user-info" id="user-info"></div>
+    <ul class="menu-list">
+      <li><a href="profilo.html">Profilo</a></li>
+      <li><a href="modifica_profilo.html">Modifica Profilo</a></li>
+      <li><a href="lista-giochi.html">Lista Giochi</a></li>
+      <li><a href="statistiche.html">Statistiche</a></li>
+    </ul>
+    <button id="logout" class="logout-btn">Logout</button>
+  </div>
 
   <!-- Contenuto principale -->
   <div class="main-content">
     <div class="container">
       <h2 id="greeting"></h2>
       <p>Pagina personale utente.</p>
+
+      <h3>I tuoi giochi:</h3>
+      <table id="userGamesTable">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Tipologia</th>
+            <th>Durata Media</th>
+            <th>Difficoltà</th>
+            <th>Giocatori Min</th>
+            <th>Giocatori Max</th>
+            <th>Proprietario</th>
+            <th>Posizione</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- I giochi dell'utente verranno caricati qui tramite JS -->
+        </tbody>
+      </table>
     </div>
   </div>
 
