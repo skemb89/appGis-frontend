@@ -36,7 +36,7 @@ document.getElementById('loginButton').addEventListener('click', async function(
     // Salva il token, il nome utente e l'ID utente in localStorage
     localStorage.setItem('token', data.token);
     localStorage.setItem('username', username);
-    localStorage.setItem('userId', data.userId); // Memorizza l'ID dell'utente
+    localStorage.setItem('userId', data.userId); // Memorizza l'ID del giocatore
 
     // Reindirizza alla pagina del profilo
     window.location.href = 'profilo.html';
