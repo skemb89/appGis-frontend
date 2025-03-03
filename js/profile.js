@@ -1,25 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username") || "Utente";
+  const userId = localStorage.getItem("userId");  // Recupera l'ID utente dal localStorage
+
   document.getElementById("user-info").textContent = username;
   const greetingElement = document.getElementById("greeting");
 
-  // Se non c'è un token, rimanda alla pagina di login
-  if (!token) {
-    window.location.href = "index.html";
+  // Se non c'è un token o un ID, rimanda alla pagina di login
+  if (!token || !userId) {
+    console.error('User ID non trovato');
+    window.location.href = "index.html";  // Redirigi al login se manca il token o l'ID
     return;
   }
 
-  // Mostra il saluto con il nome utente (se presente)
+  // Mostra il saluto con il nome utente
   if (greetingElement && username) {
     greetingElement.textContent = `Ciao ${username}`;
-  }
-
-  // Aggiungi la logica per mostrare i giochi dell'utente
-  const userId = localStorage.getItem("userId");  // Assicurati che l'ID dell'utente sia memorizzato nel localStorage
-  if (!userId) {
-    console.error("User ID non trovato.");
-    return;
   }
 
   // Funzione per ottenere i giochi dell'utente
@@ -30,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
           'Authorization': `Bearer ${token}`  // Includi il token di autenticazione
         }
       });
-      
+
       if (!response.ok) {
         throw new Error('Errore nel recuperare i giochi');
       }
