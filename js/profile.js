@@ -21,11 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Funzione per ottenere i giochi dell'utente
   async function getUserGames() {
     try {
-      const response = await fetch(`https://appGis.onrender.com/api/giochi/giocatore/${userId}`, {
+      const response = await fetch(`https://appgis.onrender.com/api/giochi/giocatore/${userId}`, {
         headers: {
           'Authorization': `Bearer ${token}`  // Includi il token di autenticazione
         }
       });
+
+      console.log('Response status:', response.status);
+      const data = await response.json();
+      console.log('Response body:', data);
 
       if (!response.ok) {
         throw new Error('Errore nel recuperare i giochi');
