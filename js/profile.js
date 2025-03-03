@@ -28,14 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       console.log('Response status:', response.status);
-      const data = await response.json();
-      console.log('Response body:', data);
 
+      // Verifica che la risposta sia valida
       if (!response.ok) {
         throw new Error('Errore nel recuperare i giochi');
       }
 
       const giochi = await response.json();
+      console.log('Response body:', giochi);
 
       // Mostra i giochi in una tabella
       const tableBody = document.getElementById("userGamesTable").getElementsByTagName("tbody")[0];
