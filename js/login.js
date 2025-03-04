@@ -20,6 +20,7 @@ document.getElementById('loginButton').addEventListener('click', async function(
   const password = document.getElementById('password').value;
 
   try {
+    // Effettua il login
     const response = await fetch('https://appgis.onrender.com/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -38,6 +39,24 @@ document.getElementById('loginButton').addEventListener('click', async function(
     localStorage.setItem('username', username);
     localStorage.setItem('userId', data.userId); // Memorizza l'ID del giocatore
 
+    // Ora recuperiamo il nome del giocatore associato all'utente
+    const giocatoreResponse = await fetch('https://appgis.onrender.com/api/auth/giocatore', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${data.token}`  // Invia il token di autenticazione
+      }
+    });
+
+    const giocatoreData = await giocatoreResponse.json();
+
+    if (giocatoreResponse.status === 200) {
+      // Salva anche il nome del giocatore in localStorage
+      localStorage.setItem('giocatoreNome', giocatoreData.nomeGiocatore);
+    } else {
+      console.log('Giocatore non trovato o errore nel recupero');
+      localStorage.setItem('giocatoreNome', 'Nessun giocatore associato');
+    }
+
     // Reindirizza alla pagina del profilo
     window.location.href = 'profilo.html';
   } catch (error) {
@@ -45,6 +64,7 @@ document.getElementById('loginButton').addEventListener('click', async function(
     showError('Errore durante il login');
   }
 });
+
 
 // Event listener per il pulsante di registrazione
 document.getElementById('registerButton').addEventListener('click', async function() {

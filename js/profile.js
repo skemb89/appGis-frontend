@@ -1,10 +1,38 @@
+// Funzione per generare un saluto casuale
+function generateGreeting(username) {
+  const greetings = [
+    "Ciao",
+    "Benvenuto",
+    "Salve",
+    "Ehi",
+    "Ciao, come va?",
+    "Sei un necro?"
+  ];
+
+  // Scegli un saluto casuale
+  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+
+  // Mostra il saluto con il nome utente
+  return `${randomGreeting} ${username}`;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username") || "Utente";
   const userId = localStorage.getItem("userId");  // Recupera l'ID utente dal localStorage
+  const giocatoreNome = localStorage.getItem("giocatoreNome");  // Recupera il nome del giocatore dal localStorage
 
-  document.getElementById("user-info").textContent = username;
+  // Mostra il nome utente nella sidebar
+  const userInfoElement = document.getElementById("user-info");
+  if (userInfoElement) {
+    userInfoElement.textContent = giocatoreNome || "Nessun giocatore associato";  // Se il nome del giocatore non è disponibile, mostra "Nessun giocatore associato"
+  }
+
+  // Mostra il saluto con il nome utente
   const greetingElement = document.getElementById("greeting");
+  if (greetingElement) {
+    greetingElement.textContent = generateGreeting(giocatoreNome || username);  // Saluto casuale con il nome utente
+  }
 
   // Se non c'è un token o un ID, rimanda alla pagina di login
   if (!token || !userId) {
@@ -13,11 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  // Mostra il saluto con il nome utente
-  if (greetingElement && username) {
-    greetingElement.textContent = `Ciao ${username}`;
-  }
-
+  // Funzione per recuperare i giochi dell'utente
   async function getUserGames() {
     try {
       const response = await fetch(`https://appgis.onrender.com/api/giochi/giocatore/${userId}`, {
@@ -51,12 +75,19 @@ document.addEventListener("DOMContentLoaded", function () {
   
           row.insertCell(0).textContent = gioco.nome;
           row.insertCell(1).textContent = gioco.tipologia.nome;  // Tipologia (nome)
-          row.insertCell(2).textContent = gioco.durataMedia;
-          row.insertCell(3).textContent = gioco.difficolta;
-          row.insertCell(4).textContent = gioco.giocatoriMin;
-          row.insertCell(5).textContent = gioco.giocatoriMax;
-          row.insertCell(6).textContent = gioco.proprietario.nome;  // Proprietario (nome)
-          row.insertCell(7).textContent = gioco.posizione || 'N/A';
+          row.insertCell(2).textContent = gioco.dataPubblicazione || 'N/A'; // Data di pubblicazione
+          row.insertCell(3).textContent = gioco.durataMedia;
+          row.insertCell(4).textContent = gioco.difficolta;
+          row.insertCell(5).textContent = gioco.posizione || 'N/A';
+          
+          // Aggiungi immagine
+          const imgCell = row.insertCell(6);
+          const img = document.createElement("img");
+          img.src = gioco.immagine || 'path_to_default_image.jpg';  // Usa un'immagine predefinita se manca l'URL
+          img.alt = gioco.nome;
+          img.style.width = '50px';  // Imposta una dimensione moderata per l'immagine
+          img.style.height = 'auto';
+          imgCell.appendChild(img);
         });
       }
     } catch (error) {
@@ -75,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.removeItem("token");
       localStorage.removeItem("username");
       localStorage.removeItem("userId");
+      localStorage.removeItem("giocatoreNome"); // Rimuovi anche il nome del giocatore dal localStorage
       window.location.href = "index.html";
     });
   }

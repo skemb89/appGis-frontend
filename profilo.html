@@ -16,7 +16,7 @@
   
   <!-- Sidebar con il menu di navigazione -->
   <div class="sidebar" id="sidebar">
-    <div class="user-info" id="user-info"></div>
+    <div class="user-info" id="user-info"></div>  <!-- Qui sarà mostrato il nome utente -->
     <ul class="menu-list">
       <li><a href="profilo.html">Profilo</a></li>
       <li><a href="modifica_profilo.html">Modifica Profilo</a></li>
@@ -29,21 +29,20 @@
   <!-- Contenuto principale -->
   <div class="main-content">
     <div class="container">
-      <h2 id="greeting"></h2>
+      <h2 id="greeting"></h2>  <!-- Qui sarà mostrato il saluto con il nome utente -->
       <p>Pagina personale utente.</p>
 
-      <h3>I tuoi giochi:</h3>
+      <h3>I miei giochi:</h3>
       <table id="userGamesTable">
         <thead>
           <tr>
             <th>Nome</th>
             <th>Tipologia</th>
+            <th>Data Pubblicazione</th> <!-- Aggiunta colonna per la data di pubblicazione -->
             <th>Durata Media</th>
             <th>Difficoltà</th>
-            <th>Giocatori Min</th>
-            <th>Giocatori Max</th>
-            <th>Proprietario</th>
             <th>Posizione</th>
+            <th>Immagine</th> <!-- Aggiunta colonna per l'immagine -->
           </tr>
         </thead>
         <tbody>
