@@ -18,6 +18,7 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 
   <style>
+    /* HTML e Body devono occupare tutta l'altezza della pagina */
     html, body {
       height: 100%;
       margin: 0;
@@ -28,25 +29,23 @@
       box-sizing: border-box;
     }
 
+    /* Body occupa tutta l'altezza disponibile e non ha margini */
     body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding-top: env(safe-area-inset-top, 0);  /* Gestisce il notch */
-      padding-bottom: env(safe-area-inset-bottom, 0);
+      padding-top: env(safe-area-inset-top, 0);  /* Aggiungi spazio per il notch */
+      padding-bottom: env(safe-area-inset-bottom, 0);  /* Aggiungi spazio per la parte inferiore */
     }
 
+    /* Il contenuto si allinea al centro e la container ha un aspetto stilizzato */
     .container {
       background: #fff;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 300px;
       text-align: center;
-      flex-grow: 1;
-      height: 100%; /* Occupare tutta l'altezza disponibile */
+      margin-top: 10px;  /* Per evitare che si sovrapponga al bordo superiore */
+      flex-grow: 1;  /* La container si espande per riempire la pagina */
     }
 
     h2 {
