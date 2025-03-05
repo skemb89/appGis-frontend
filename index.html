@@ -29,13 +29,16 @@
       box-sizing: border-box;
     }
 
-    /* Body occupa tutta l'altezza disponibile e non ha margini */
+    /* Usa flexbox per centrare il contenuto sia orizzontalmente che verticalmente */
     body {
-      padding-top: env(safe-area-inset-top, 0);  /* Aggiungi spazio per il notch */
-      padding-bottom: env(safe-area-inset-bottom, 0);  /* Aggiungi spazio per la parte inferiore */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: env(safe-area-inset-top);  /* Spazio per il notch */
+      padding-bottom: env(safe-area-inset-bottom);  /* Aggiungi spazio per la parte inferiore */
     }
 
-    /* Il contenuto si allinea al centro e la container ha un aspetto stilizzato */
+    /* La container si adatta al contenuto e si estende */
     .container {
       background: #fff;
       padding: 20px;
@@ -44,8 +47,7 @@
       width: 100%;
       max-width: 300px;
       text-align: center;
-      margin-top: 10px;  /* Per evitare che si sovrapponga al bordo superiore */
-      flex-grow: 1;  /* La container si espande per riempire la pagina */
+      margin-top: 0;  /* Assicurati che non ci sia spazio sopra */
     }
 
     h2 {
