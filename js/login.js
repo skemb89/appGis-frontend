@@ -65,7 +65,6 @@ document.getElementById('loginButton').addEventListener('click', async function(
   }
 });
 
-
 // Event listener per il pulsante di registrazione
 document.getElementById('registerButton').addEventListener('click', async function() {
   const username = document.getElementById('username').value;
@@ -89,5 +88,14 @@ document.getElementById('registerButton').addEventListener('click', async functi
   } catch (error) {
     console.error('Errore durante la registrazione:', error);
     showError('Errore durante la registrazione');
+  }
+});
+
+// Aggiungi un listener per l'evento keydown sulla password
+document.getElementById('password').addEventListener('keydown', function(event) {
+  // Verifica se il tasto premuto è "Enter" (codice tasto 13)
+  if (event.key === "Enter") {
+    event.preventDefault(); // Previeni l'azione predefinita (ad esempio, l'invio del form)
+    document.getElementById('loginButton').click(); // Simula il click sul pulsante di login
   }
 });

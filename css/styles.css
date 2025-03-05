@@ -9,10 +9,97 @@ body {
     overflow-x: hidden;  /* Blocca lo scorrimento laterale */
 }
 
+/* Solo per la pagina index.html */
+.index-page {
+    font-family: Arial, sans-serif;
+    background-color: #343a40;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;  /* Blocca lo scorrimento laterale */
+  }
+/* Header fisso in alto */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #343a40;
+    color: white;
+    display: flex;
+    justify-content: center; /* Centra gli elementi */
+    align-items: center;
+    padding: 0 0px; /* Padding per non far toccare il bordo */
+    z-index: 1000;
+  }
+  
+  /* Centrare il greeting */
+  .fixed-header h2 {
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    margin: 0;
+    flex-grow: 1; /* Fa sì che il greeting occupi tutto lo spazio disponibile */
+  }
+  
+  /* Icona delle impostazioni */
+  .settings-icon {
+    font-size: 22px;
+    color: white;
+    text-decoration: none;
+    position: absolute; /* Posiziona l'icona in alto a destra */
+    right: 20px; /* Distanza dal bordo destro */
+    top: 50%;
+    transform: translateY(-50%); /* Centra l'icona verticalmente */
+  }
+  
+  .settings-icon:hover {
+    color: #007bff; /* Colore al passaggio del mouse */
+  }
+  
+  /* Contenuto principale */
+  .main-content {
+    margin-top: 60px;  /* Spazio per l'header */
+    margin-bottom: 60px; /* Spazio per il menù in basso */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Menù di navigazione in basso */
+  .bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #343a40;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+  }
+  .bottom-menu .menu-item {
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white; /* Colore di default (bianco) per il testo */
+  }
+  
+  .bottom-menu .menu-item .icon {
+    font-size: 20px;
+    margin-bottom: 2px;
+    color: #ccc; /* Icone in colore grigio chiaro */
+  }
+
+  
 /* Centra il box di login senza toccare il container */
 .login-box {
     font-family: Arial, sans-serif;
-    background-color: #fff;
+    background-color: #f4f4f4;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -66,139 +153,10 @@ body {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
   }
-/* Stile per il titolo di benvenuto 
-#greeting {
-    margin-top: 50px;  Sposta il titolo più in basso 
-}*/
 
-/* Sidebar */
-.sidebar {
-    width: 250px;
-    background-color: #343a40;
-    padding: 20px;
-    color: white;
-    position: fixed;
-    height: 100%;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-}
-
-/* Nome utente nella sidebar */
-.user-info {
-    font-size: 18px;
-    font-weight: bold;
-    color: white; /* Sempre bianco */
-    padding-bottom: 20px; /* Spazio sotto il nome */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Linea separatrice */
-    text-align: center;
-}
-
-/* Contenitore del menu */
-.menu-top {
-    flex-grow: 1; /* Fa in modo che il contenuto occupi lo spazio disponibile */
-}
-
-/* Menu */
-.menu-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 40px;
-}
-
-.menu-list li {
-    margin: 15px 0;
-}
-
-/* Stile uniforme per tutti i link, incluso il Logout */
-.menu-list li a,
-.logout-btn {
-    display: block;
-    color: white;
-    padding: 10px 15px; /* Stessa spaziatura per tutti */
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s, color 0.3s; /* Aggiunto il cambio di colore della scritta */
-    text-align: left;
-    width: calc(100% - 30px); /* Evita che esca fuori dalla sidebar */
-}
-
-/* Stesso effetto hover per tutti i link */
-.menu-list li a:hover,
-.logout-btn:hover {
-    background-color: #007bff;
-    color: white; /* Assicura che il testo rimanga bianco al passaggio del mouse */
-}
-
-/* Aggiungi altre personalizzazioni, se necessario */
-.logout-btn {
-    font-size: 16px; /* Imposta la stessa dimensione del testo per uniformità */
-    all: unset; /* Resetta tutti gli stili predefiniti */
-    display: block; /* Mantiene il comportamento del link */
-    width: calc(100% - 30px);
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-align: left;
-    cursor: pointer;
-}
-
-/* Rimuove eventuali effetti di focus */
-.logout-btn:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-
-/* Hamburger */
-.hamburger {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 1000;
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.hamburger .bar {
-    width: 30px;
-    height: 4px;
-    background-color: #343a40;
-    transition: background-color 0.3s;
-}
-
-.hamburger.active .bar {
-    background-color: white;
-}
-
-/* Contenuto principale */
-.main-content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    transition: margin-left 0.3s ease;
-    margin-left: 250px;
-    padding-left: 70px; /* Aggiunto spazio per evitare che il testo sia troppo vicino */
-}
 
 /* Quando la sidebar è nascosta su mobile */
 @media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-    
-    .sidebar {
-        transform: translateX(-100%);
-    }
-    
-    .sidebar.active {
-        transform: translateX(0);
-    }
     
     .main-content {
         margin-left: 0;
@@ -267,3 +225,132 @@ body {
     background-color: #f1f1f1;
     border: none;
 }
+
+/*STILI RICERCA E AGGIUNGI GIOCO*/
+/* Stile per la card del gioco */
+.game-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .game-card:hover {
+    transform: scale(1.05);
+  }
+  .game-image {
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+  }
+  .game-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .game-title {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  .game-year {
+    font-size: 0.9em;
+    color: gray;
+  }
+  
+  /* MODAL */
+  #gameDetailsModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fondo scuro traslucido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+  }
+  
+  #gameDetailsModal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  
+  /* Contenitore del dettaglio gioco */
+  #gameDetailsContent {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+  
+  #gameDetailsModal.visible #gameDetailsContent {
+    transform: scale(1);
+  }
+  
+  /* Stile per il pulsante di chiusura (freccia) */
+  #closeModal {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  #closeModal:hover {
+    transform: scale(1.2);
+  }
+  
+  .game-detail-image {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+  }
+  
+  .game-detail-title {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
+  
+  /* Container della barra di ricerca */
+.search-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;  /* Regola la larghezza della barra di ricerca */
+  }
+  
+  /* Barra di ricerca */
+  #searchInput {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Icona X per cancellare */
+  .clear-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #888;
+  }
+  
+  .clear-icon:hover {
+    color: #333;
+  }
+  

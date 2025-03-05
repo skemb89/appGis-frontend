@@ -3,20 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profilo Utente</title>
+  <title>Ricerca</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- Header fisso in alto -->
+
+  <!-- Header con il titolo "Ricerca" -->
   <header class="fixed-header">
-    <h2 id="greeting">Bentornato, [Nome]</h2>
-    <a href="modifica_profilo.html" class="settings-icon">⚙️</a> <!-- Icona delle impostazioni -->
+    <h2>Ricerca</h2>  <!-- Titolo Ricerca -->
   </header>
 
   <!-- Contenuto principale -->
-  <main class="main-content">
-    <p>Bentornato, di seguito vedrai le statistiche delle ultime partite.</p>
-  </main>
+  <div class="main-content">
+    <div class="container">
+      <h2>Cerca un gioco su BoardGameGeek</h2>
+      <!-- Barra di ricerca accorciata con la X per cancellare il contenuto -->
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Inserisci il nome del gioco">
+        <span id="clearSearch" class="clear-icon">❌</span> <!-- X per cancellare -->
+      </div>
+    
+      <div id="resultsContainer"></div> <!-- Qui verranno mostrati i risultati -->
+    </div>
+    
+    <!-- MODAL DETTAGLI GIOCO -->
+    <div id="gameDetailsModal" class="modal">
+      <button id="closeModal" class="close-button">←</button>
+      <div id="gameDetailsContent" class="modal-content"></div>
+    </div>
+  </div>
 
   <!-- Menù di navigazione in basso -->
   <nav class="bottom-menu">
@@ -43,5 +58,8 @@
   </nav>
 
   <script src="js/profile.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/aggiungi-gioco.js"></script> <!-- Aggiungi il file js per la logica della ricerca -->
+
 </body>
 </html>
