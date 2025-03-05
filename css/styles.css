@@ -7,6 +7,61 @@ body {
     display: flex;
 }
 
+ /* La container si adatta al contenuto e si estende */
+ .container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    margin-top: 0;  /* Assicurati che non ci sia spazio sopra */
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    box-sizing: border-box;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  button {
+    width: 48%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Stile per il messaggio di errore */
+  #error-message {
+    color: white;
+    background-color: red;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
 /* Stile per il titolo di benvenuto 
 #greeting {
     margin-top: 50px;  Sposta il titolo più in basso 
