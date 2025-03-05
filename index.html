@@ -11,20 +11,19 @@
   <!-- Supporto PWA per Android e iOS -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes"> <!-- Ancora utile su Safari -->
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="AppGiS">
 
   <!-- Icona Apple -->
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 
-  <!-- Stili per la pagina -->
   <style>
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
       width: 100%;
-      background-color: #f4f4f4;
+      background-color: #f4f4f4;  /* Usa lo stesso colore di sfondo */
       font-family: Arial, sans-serif;
       box-sizing: border-box;
     }
@@ -34,7 +33,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      padding-top: env(safe-area-inset-top); /* Aggiungi il padding dinamico per i dispositivi con notch */
+      padding-top: env(safe-area-inset-top, 0);  /* Gestisce il notch */
       padding-bottom: env(safe-area-inset-bottom); /* Evita problemi sotto */
       padding-left: env(safe-area-inset-left);
       padding-right: env(safe-area-inset-right);
