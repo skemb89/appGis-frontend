@@ -7,18 +7,6 @@ body {
     display: flex;
 }
 
- /* La container si adatta al contenuto e si estende */
- .container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-    margin-top: 0;  /* Assicurati che non ci sia spazio sopra */
-  }
-
   h2 {
     margin-bottom: 20px;
     color: #333;
