@@ -5,6 +5,22 @@ body {
     min-height: 100vh;
     margin: 0;
     display: flex;
+    flex-direction: column;
+    overflow-x: hidden;  /* Blocca lo scorrimento laterale */
+}
+
+/* Centra il box di login senza toccare il container */
+.login-box {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    margin: auto;  /* Centra il box */
+    margin-top: 20px;  /* Assicurati che non tocchi la parte superiore */
 }
 
   h2 {
