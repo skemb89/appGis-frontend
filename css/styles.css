@@ -63,38 +63,42 @@ body {
   .main-content {
     margin-top: 60px;  /* Spazio per l'header */
     margin-bottom: 60px; /* Spazio per il menù in basso */
-    padding: 20px;
+    padding: 90px;
     text-align: center;
   }
   
-  /* Menù di navigazione in basso */
-  .bottom-menu {
+/* Menù di navigazione in basso */
+.bottom-menu {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 60px;
+    height: 90px; /* Altezza aumentata */
     background-color: #343a40;
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    z-index: 1000;
-  }
-  .bottom-menu .menu-item {
+    align-items: flex-start; /* Sposta il contenuto più in alto */
+    padding-top: 10px; /* Dà un po' di spazio sopra */
+    padding-bottom: env(safe-area-inset-bottom); /* Spazio sicuro per iPhone */
+}
+
+/* Stile delle voci del menù */
+.bottom-menu .menu-item {
     text-decoration: none;
     font-size: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white; /* Colore di default (bianco) per il testo */
-  }
-  
-  .bottom-menu .menu-item .icon {
+    color: white;
+}
+
+/* Icone del menù */
+.bottom-menu .menu-item .icon {
     font-size: 20px;
     margin-bottom: 2px;
-    color: #ccc; /* Icone in colore grigio chiaro */
-  }
-
+    color: #ccc;
+    margin-top: -5px; /* Sposta le icone leggermente in alto */
+}
   
 /* Centra il box di login senza toccare il container */
 .login-box {
@@ -258,14 +262,14 @@ body {
     color: gray;
   }
   
-  /* MODAL */
-  #gameDetailsModal {
+/* MODAL - Copre tutto lo schermo */
+#gameDetailsModal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Fondo scuro traslucido */
+    background: rgba(0, 0, 0, 0.9); /* Sfondo scuro */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -273,56 +277,64 @@ body {
     transform: translateY(20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
     pointer-events: none;
-  }
-  
-  #gameDetailsModal.visible {
+    z-index: 2000;
+}
+
+/* Quando la modale è visibile */
+#gameDetailsModal.visible {
     opacity: 1;
     transform: translateY(0);
     pointer-events: all;
-  }
-  
-  /* Contenitore del dettaglio gioco */
-  #gameDetailsContent {
+}
+
+/* Contenitore dei dettagli gioco */
+#gameDetailsContent {
     background: white;
     width: 90%;
-    max-width: 400px;
+    max-width: 500px;
+    max-height: 85vh;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
-  }
-  
-  #gameDetailsModal.visible #gameDetailsContent {
-    transform: scale(1);
-  }
-  
-  /* Stile per il pulsante di chiusura (freccia) */
-  #closeModal {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 30px;
-    color: #333;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  #closeModal:hover {
-    transform: scale(1.2);
-  }
-  
-  .game-detail-image {
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Immagine del gioco */
+.game-detail-image {
     width: 100%;
     max-height: 250px;
     object-fit: cover;
-  }
-  
-  .game-detail-title {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Pulsante di chiusura (←) sopra l'immagine */
+#closeModal {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+#closeModal:hover {
+    transform: scale(1.2);
+}
+
+
+/* Titolo del gioco */
+.game-detail-title {
     font-size: 1.5em;
     margin: 10px 0;
-  }
-  
+    color: #333;
+}
+
   /* Container della barra di ricerca */
 .search-container {
     position: relative;
