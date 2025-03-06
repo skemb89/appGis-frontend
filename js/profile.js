@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Funzione per recuperare i dettagli del profilo (con foto)
   async function getUserProfile() {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/profile-with-photo', {
+      const response = await fetch('https://appgis.onrender.com/api/auth/profile-with-photo', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`  // Includi il token di autenticazione
