@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     greetingElement.textContent = generateGreeting(username);
   }
 
-  // Mostra il nome del giocatore nel main content con stile più grande
+  
   const userInfoElement = document.getElementById("user-info");
   if (userInfoElement) {
     userInfoElement.textContent = giocatoreNome || "Nessun giocatore associato";
@@ -54,10 +54,16 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Aggiorna il DOM con i dati del profilo
-      const usernameElement = document.getElementById('user-info');
-      if (usernameElement) {
-        usernameElement.textContent = data.username || "Nome utente non disponibile";
+      //const usernameElement = document.getElementById('user-info');
+      //if (usernameElement) {
+      //  usernameElement.textContent = data.username || "Nome utente non disponibile";
+      //}
+
+      const userInfoElement = document.getElementById("user-info");
+      if (userInfoElement) {
+          userInfoElement.textContent = giocatoreNome || "Nessun giocatore associato";
       }
+
 
       const photoElement = document.getElementById('user-photo');
       if (photoElement) {
@@ -66,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         photoElement.src = `https://appgis.onrender.com${data.photo}`; // Assicurati che venga aggiunto il dominio
   }     else {
         // Se non c'è una foto, usa una foto di default
-      photoElement.src = '/uploads/default.png';  // Usa un'immagine predefinita se manca la foto
+      photoElement.src = 'https://appgis.onrender.com/uploads/default.png';  // Usa un'immagine predefinita se manca la foto
   }
 }
 

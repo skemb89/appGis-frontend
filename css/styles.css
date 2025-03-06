@@ -105,26 +105,31 @@ body {
 .profile-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* Allinea tutto a sinistra */
   padding: 20px;
 }
 
+/* Contenitore dell'icona e del nome utente */
 .profile-header {
   display: flex;
-  align-items: center; /* Allinea l'immagine e il nome utente */
+  align-items: center; /* Allinea verticalmente l'immagine e il nome utente */
   margin-bottom: 20px;
+  width: 100%; /* Assicura che il contenitore occupi tutta la larghezza disponibile */
 }
 
+/* Stile per l'immagine */
 .profile-photo {
-  width: 60px;  /* Imposta la larghezza dell'immagine */
-  height: 60px; /* Imposta l'altezza dell'immagine */
+  width: 80px;  /* Imposta una larghezza maggiore per l'immagine */
+  height: 80px; /* Imposta un'altezza maggiore per l'immagine */
   border-radius: 50%; /* Rende l'immagine rotonda */
-  margin-right: 15px; /* Spazio tra l'immagine e il nome utente */
+  margin-right: 15px; /* Distanza tra l'immagine e il nome */
 }
 
+/* Stile per il nome utente */
 .player-name {
-  font-size: 1.5rem; /* Imposta la dimensione del font per il nome utente */
+  font-size: 1.8rem; /* Aumenta la dimensione del nome utente */
   font-weight: bold;
+  text-align: left; /* Allinea il nome utente a sinistra */
 }
 
 
