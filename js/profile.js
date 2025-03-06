@@ -78,63 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Carica i dati del profilo utente al caricamento della pagina
   getUserProfile();
 
-  // Funzione per recuperare i giochi dell'utente
-  async function getUserGames() {
-    try {
-      const response = await fetch(`https://appgis.onrender.com/api/giochi/giocatore/${userId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`  // Includi il token di autenticazione
-        }
-      });
-
-      console.log('Response status:', response.status);
-      const data = await response.json();
-      console.log('Response body:', data);
-
-      if (!response.ok) {
-        throw new Error('Errore nel recuperare i giochi');
-      }
-
-      const giochi = data;  // Assicurati che `giochi` contenga l'array dei giochi.
-
-      const tableBody = document.getElementById("userGamesTable").getElementsByTagName("tbody")[0];
-
-      // Se l'array dei giochi è vuoto, mostra un messaggio nella tabella
-      if (giochi.length === 0) {
-        const row = tableBody.insertRow();
-        row.classList.add("no-data");
-        row.insertCell(0).colSpan = 8;  // Per fare in modo che la riga copra tutte le colonne
-        row.cells[0].textContent = "Nessun gioco disponibile";
-      } else {
-        // Aggiungi i giochi alla tabella
-        giochi.forEach(gioco => {
-          const row = tableBody.insertRow();
-
-          row.insertCell(0).textContent = gioco.nome;
-          row.insertCell(1).textContent = gioco.tipologia.nome;  // Tipologia (nome)
-          row.insertCell(2).textContent = gioco.dataPubblicazione || 'N/A'; // Data di pubblicazione
-          row.insertCell(3).textContent = gioco.durataMedia;
-          row.insertCell(4).textContent = gioco.difficolta;
-          row.insertCell(5).textContent = gioco.posizione || 'N/A';
-          
-          // Aggiungi immagine
-          const imgCell = row.insertCell(6);
-          const img = document.createElement("img");
-          img.src = gioco.immagine || '/uploads/default.png';  // Usa un'immagine predefinita se manca l'URL
-          img.alt = gioco.nome;
-          img.style.width = '50px';  // Imposta una dimensione moderata per l'immagine
-          img.style.height = 'auto';
-          imgCell.appendChild(img);
-        });
-      }
-    } catch (error) {
-      console.error('Errore nel recuperare i giochi dell\'utente:', error);
-    }
-  }
-
-  // Carica i giochi al caricamento della pagina
-  getUserGames();
-
   // Logout
   const logoutButton = document.getElementById("logout");
   if (logoutButton) {
