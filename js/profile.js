@@ -62,13 +62,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const photoElement = document.getElementById('user-photo');
       if (photoElement) {
         if (data.photo && data.photo !== 'Nessuna foto disponibile') {
-          // Se c'è una foto, aggiorna l'elemento img con l'URL della foto
-          photoElement.src = data.photo;
-        } else {
-          // Se non c'è una foto, usa una foto di default
-          photoElement.src = '/uploads/default.png';  // Assicurati che questo percorso sia corretto
-        }
-      }
+        // Se c'è una foto, aggiorna l'elemento img con l'URL della foto
+        photoElement.src = `https://appgis.onrender.com${data.photo}`; // Assicurati che venga aggiunto il dominio
+  }     else {
+        // Se non c'è una foto, usa una foto di default
+      photoElement.src = '/uploads/default.png';  // Usa un'immagine predefinita se manca la foto
+  }
+}
+
     } catch (error) {
       console.error(error);
       alert('Errore nel recuperare il profilo utente con foto');
