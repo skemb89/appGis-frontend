@@ -9,11 +9,7 @@ function generateGreeting(username) {
     "Sei un necro?"
   ];
 
-  // Scegli un saluto casuale
-  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Mostra il saluto con il nome utente
-  return `${randomGreeting} ${username}`;
+  return greetings[Math.floor(Math.random() * greetings.length)];
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -22,16 +18,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const userId = localStorage.getItem("userId");  // Recupera l'ID utente dal localStorage
   const giocatoreNome = localStorage.getItem("giocatoreNome");  // Recupera il nome del giocatore dal localStorage
 
-  // Mostra il nome utente nella sidebar
-  const userInfoElement = document.getElementById("user-info");
-  if (userInfoElement) {
-    userInfoElement.textContent = giocatoreNome || "Nessun giocatore associato";  // Se il nome del giocatore non è disponibile, mostra "Nessun giocatore associato"
-  }
-
-  // Mostra il saluto con il nome utente
+  // Mostra solo il saluto casuale nell'header
   const greetingElement = document.getElementById("greeting");
   if (greetingElement) {
-    greetingElement.textContent = generateGreeting(giocatoreNome || username);  // Saluto casuale con il nome utente
+    greetingElement.textContent = generateGreeting(username);
+  }
+
+  // Mostra il nome del giocatore nel main content con stile più grande
+  const userInfoElement = document.getElementById("user-info");
+  if (userInfoElement) {
+    userInfoElement.textContent = giocatoreNome || "Nessun giocatore associato";
   }
 
   // Se non c'è un token o un ID, rimanda alla pagina di login
@@ -41,6 +37,47 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
+  // Funzione per recuperare i dettagli del profilo (con foto)
+  async function getUserProfile() {
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/profile-with-photo', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`  // Includi il token di autenticazione
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Errore nel recuperare il profilo');
+      }
+
+      // Aggiorna il DOM con i dati del profilo
+      const usernameElement = document.getElementById('user-info');
+      if (usernameElement) {
+        usernameElement.textContent = data.username || "Nome utente non disponibile";
+      }
+
+      const photoElement = document.getElementById('user-photo');
+      if (photoElement) {
+        if (data.photo && data.photo !== 'Nessuna foto disponibile') {
+          // Se c'è una foto, aggiorna l'elemento img con l'URL della foto
+          photoElement.src = data.photo;
+        } else {
+          // Se non c'è una foto, usa una foto di default
+          photoElement.src = '/uploads/default.png';  // Assicurati che questo percorso sia corretto
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Errore nel recuperare il profilo utente con foto');
+    }
+  }
+
+  // Carica i dati del profilo utente al caricamento della pagina
+  getUserProfile();
+
   // Funzione per recuperare i giochi dell'utente
   async function getUserGames() {
     try {
@@ -49,19 +86,19 @@ document.addEventListener("DOMContentLoaded", function () {
           'Authorization': `Bearer ${token}`  // Includi il token di autenticazione
         }
       });
-  
+
       console.log('Response status:', response.status);
       const data = await response.json();
       console.log('Response body:', data);
-  
+
       if (!response.ok) {
         throw new Error('Errore nel recuperare i giochi');
       }
-  
+
       const giochi = data;  // Assicurati che `giochi` contenga l'array dei giochi.
-  
+
       const tableBody = document.getElementById("userGamesTable").getElementsByTagName("tbody")[0];
-  
+
       // Se l'array dei giochi è vuoto, mostra un messaggio nella tabella
       if (giochi.length === 0) {
         const row = tableBody.insertRow();
@@ -72,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Aggiungi i giochi alla tabella
         giochi.forEach(gioco => {
           const row = tableBody.insertRow();
-  
+
           row.insertCell(0).textContent = gioco.nome;
           row.insertCell(1).textContent = gioco.tipologia.nome;  // Tipologia (nome)
           row.insertCell(2).textContent = gioco.dataPubblicazione || 'N/A'; // Data di pubblicazione
@@ -83,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Aggiungi immagine
           const imgCell = row.insertCell(6);
           const img = document.createElement("img");
-          img.src = gioco.immagine || 'path_to_default_image.jpg';  // Usa un'immagine predefinita se manca l'URL
+          img.src = gioco.immagine || '/uploads/default.png';  // Usa un'immagine predefinita se manca l'URL
           img.alt = gioco.nome;
           img.style.width = '50px';  // Imposta una dimensione moderata per l'immagine
           img.style.height = 'auto';
