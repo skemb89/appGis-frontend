@@ -100,26 +100,31 @@ body {
     color: #ccc;
     margin-top: -5px; /* Sposta le icone leggermente in alto */
 }
+
+/* Contenitore principale del profilo */
 .profile-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between; /* Nome a sinistra, foto a destra */
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center; /* Allinea l'immagine e il nome utente */
   margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 10px;
+}
+
+.profile-photo {
+  width: 60px;  /* Imposta la larghezza dell'immagine */
+  height: 60px; /* Imposta l'altezza dell'immagine */
+  border-radius: 50%; /* Rende l'immagine rotonda */
+  margin-right: 15px; /* Spazio tra l'immagine e il nome utente */
 }
 
 .player-name {
-  font-size: 22px; /* Nome più grande */
+  font-size: 1.5rem; /* Imposta la dimensione del font per il nome utente */
   font-weight: bold;
-  margin: 0;
-}
-
-.profile-image {
-  width: 60px;  /* Dimensione dell'immagine */
-  height: 60px;
-  border-radius: 50%; /* Rende l'immagine rotonda */
-  object-fit: cover;
 }
 
 
