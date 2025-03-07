@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Login / Registrazione</title>
+  <title>Login</title>
 
   <!-- Collegamento al Manifest -->
   <link rel="manifest" href="manifest.json">
@@ -20,17 +20,17 @@
 </head>
 <body class="index-page">
   <div class="login-box">
-    <h2>Login / Registrazione</h2>
+    <h2>Login</h2>
     <form id="authForm">
       <input type="text" id="username" placeholder="Username" required>
       <input type="password" id="password" placeholder="Password" required>
       <div class="button-group">
-        <button type="button" id="loginButton">Accedi</button>
-        <button type="button" id="registerButton">Registrati</button>
+        <button type="button" id="loginButton" class="login-button">Accedi</button>
       </div>
     </form>
     <!-- Messaggio di errore -->
     <div id="error-message"></div>
+    <p>Non hai un account? <a href="registrazione.html">Registrati</a></p>
   </div>
 
   <!-- Aggiungi il link al file script esterno -->

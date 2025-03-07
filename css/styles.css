@@ -135,61 +135,129 @@ body {
 
 /* Centra il box di login senza toccare il container */
 .login-box {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-    margin: auto;  /* Centra il box */
-    margin-top: 20px;  /* Assicurati che non tocchi la parte superiore */
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  margin: auto;  /* Centra il box */
+  margin-top: 20px;  /* Assicurati che non tocchi la parte superiore */
 }
 
-  h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
 
-  input {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    box-sizing: border-box;
-  }
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  box-sizing: border-box;
+}
 
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-  }
+/* Modifica la button-group per un solo pulsante centrato */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;  /* Distanza tra i pulsanti */
+}
 
-  button {
-    width: 48%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+/* Stile per il pulsante di login */
+button.login-button {
+  width: 100%; /* Può essere anche un valore fisso, per esempio 200px, a seconda delle tue preferenze */
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  button:hover {
-    background-color: #0056b3;
-  }
+button.login-button:hover {
+  background-color: #0056b3;
+}
 
-  /* Stile per il messaggio di errore */
-  #error-message {
-    color: white;
-    background-color: red;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
+/* Stile per il messaggio di errore */
+#error-message {
+  color: white;
+  background-color: red;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Stile per il link di registrazione */
+.login-box p {
+  margin-top: 20px;
+}
+
+.login-box a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-box a:hover {
+  text-decoration: underline;
+}
+
+/* Stile per la combo box, per farla uguale agli altri campi */
+select {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Campo per il nuovo giocatore */
+#newPlayerName {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Altri stili per la pagina (per mantenere consistenza con gli altri campi) */
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Pulsanti */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
 
 
 /* Quando la sidebar è nascosta su mobile */
@@ -201,6 +269,8 @@ body {
         text-align: center; /* Centrare il testo su mobile se serve */
     }
 }
+
+
 
 /* TABELLA */
 /* Stile per la tabella */
