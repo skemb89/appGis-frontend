@@ -112,7 +112,7 @@ async function handleRegister() {
 
   // Invia i dati dell'utente e il giocatore associato
   try {
-    const response = await fetch('https://appgis.onrender.com/api/users', {
+    const response = await fetch('https://appgis.onrender.com/api/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
