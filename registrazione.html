@@ -7,7 +7,6 @@
 
   <!-- Collegamento al Manifest -->
   <link rel="manifest" href="manifest.json">
-
  
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -25,29 +24,29 @@
       <input type="password" id="password" placeholder="Password" required>
 
       <!-- Selezione Giocatore -->
-      
       <select id="playerSelect" required>
         <!-- Opzione vuota -->
         <option value="" disabled selected>Giocatore associato</option>
         <!-- Lista dei giocatori non ancora associati verrà caricata dinamicamente qui -->
-        <!-- <option value="player1">Giocatore 1</option> -->
-        <!-- <option value="player2">Giocatore 2</option> -->
         <option value="newPlayer">Nuovo giocatore</option>
       </select>
 
       <!-- Campo per inserire un nuovo giocatore -->
       <div id="newPlayerDiv" style="display:none;">
-        
         <input type="text" id="newPlayerName" placeholder="Nome del nuovo giocatore">
       </div>
-
-      <!-- Messaggio di errore -->
-      <div id="error-message"></div>
 
       <div class="button-group">
         <button type="button" id="registerButton">Registrati</button>
       </div>
     </form>
+
+    <!-- Messaggio di errore -->
+    <div id="error-message" style="display:none; padding: 10px; border-radius: 5px; color: white; margin-top: 10px;"></div>
+
+    <!-- Messaggio di successo -->
+    <div id="success-message" style="display:none; padding: 10px; border-radius: 5px; color: white; margin-top: 10px; background-color: green;"></div>
+
     <!-- Link per tornare alla pagina di login -->
     <p>Hai già un account? <a href="index.html">Accedi</a></p>
   </div>

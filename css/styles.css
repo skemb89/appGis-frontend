@@ -258,6 +258,13 @@ button:hover {
   background-color: #0056b3;
 }
 
+#success-message {
+  background-color: green; /* Verde per il messaggio di successo */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
 
 
 /* Quando la sidebar è nascosta su mobile */
