@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function loadUsers() {
     try {
         // Effettua una richiesta API per ottenere gli utenti in attesa di approvazione
-        const response = await fetch("https://appgis.onrender.com/api/admin/pending-users");
+        const response = await fetch("https://appgis.onrender.com/api/admin/users");
         const users = await response.json();
         
         const tableBody = document.getElementById("userTableBody");
@@ -55,7 +55,7 @@ async function loadUsers() {
 async function loadUnassociatedPlayers(selectElement, selectedPlayerId) {
     try {
         // Richiesta API per ottenere i giocatori disponibili
-        const response = await fetch("https://appgis.onrender.com/api/players/unassociated");
+        const response = await fetch("https://appgis.onrender.com/api/admin/players/unassociated");
         const players = await response.json();
 
         // Aggiunge le opzioni al menu a tendina
@@ -84,7 +84,7 @@ function addEventListeners() {
     document.querySelectorAll(".approveButton").forEach(button => {
         button.addEventListener("click", async (event) => {
             const userId = event.target.dataset.userId;
-            await updateUserStatus(userId, "approvato");
+            await updateUserStatus(userId, "approve");
         });
     });
 
@@ -92,7 +92,7 @@ function addEventListeners() {
     document.querySelectorAll(".rejectButton").forEach(button => {
         button.addEventListener("click", async (event) => {
             const userId = event.target.dataset.userId;
-            await updateUserStatus(userId, "rifiutato");
+            await updateUserStatus(userId, "reject");
         });
     });
 
@@ -105,18 +105,17 @@ function addEventListeners() {
 /**
  * Aggiorna lo stato di un utente (approvato/rifiutato) tramite una richiesta API.
  * @param {string} userId - ID dell'utente da aggiornare.
- * @param {string} status - Nuovo stato dell'utente ("approvato" o "rifiutato").
+ * @param {string} status - Nuovo stato dell'utente ("approve" o "reject").
  */
-async function updateUserStatus(userId, status) {
+async function updateUserStatus(userId, action) {
     try {
-        const response = await fetch(`https://appgis.onrender.com/api/admin/update-status`, {
-            method: "POST",
+        const response = await fetch(`https://appgis.onrender.com/api/admin/users/${userId}/${action}`, {
+            method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId, status })
         });
 
         if (response.ok) {
-            alert(`Utente ${status} con successo.`);
+            alert(`Utente ${action} con successo.`);
             await loadUsers(); // Aggiorna la tabella degli utenti dopo il cambiamento di stato
         } else {
             alert("Errore nell'aggiornamento dello stato.");
@@ -141,18 +140,22 @@ async function saveChanges() {
     });
 
     try {
-        const response = await fetch("https://appgis.onrender.com/api/admin/update-players", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ updates })
-        });
+        // Per aggiornare l'associazione tra utente e giocatore
+        for (const update of updates) {
+            const response = await fetch(`https://appgis.onrender.com/api/admin/users/${update.userId}/player`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ giocatoreId: update.playerId })
+            });
 
-        if (response.ok) {
-            alert("Modifiche salvate con successo.");
-            await loadUsers(); // Ricarica la tabella dopo il salvataggio
-        } else {
-            alert("Errore nel salvataggio delle modifiche.");
+            if (!response.ok) {
+                alert("Errore nel salvataggio delle modifiche.");
+                return;
+            }
         }
+
+        alert("Modifiche salvate con successo.");
+        await loadUsers(); // Ricarica la tabella dopo il salvataggio
     } catch (error) {
         console.error("Errore nel salvataggio:", error);
     }
