@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Esegui il submit dei dati (inviare tramite fetch o altro metodo)
       console.log('Registrazione effettuata con successo');
     } else {
-      showErrorMessage('Tutti i campi sono obbligatori.');
+      document.getElementById('error-message').textContent = 'Tutti i campi sono obbligatori.';
     }
   });
 });
@@ -120,13 +120,9 @@ async function handleRegister() {
     });
 
     if (response.ok) {
-      showSuccessMessage(username); // Passiamo il nome dell'utente per il messaggio di successo
-      setTimeout(() => {
-        window.location.href = 'index.html'; // Redirigi alla pagina di login dopo il messaggio di successo
-      }, 2000); // Attendere 2 secondi per vedere il messaggio di successo
+      showSuccessMessage(username); // Mostra il messaggio di successo con il nome dell'utente
     } else {
-      const errorData = await response.json();
-      showErrorMessage(`Errore durante la registrazione: ${errorData.message || 'Errore sconosciuto'}`);
+      showErrorMessage('Errore durante la registrazione.');
     }
   } catch (error) {
     console.error('Errore durante la registrazione:', error);
@@ -138,7 +134,7 @@ async function handleRegister() {
 function showErrorMessage(message) {
   const errorMessage = document.getElementById('error-message');
   errorMessage.textContent = message;
-  document.getElementById('errorModal').style.display = 'block'; // Mostra il modal di errore
+  errorMessage.style.display = 'block';
 }
 
 // Funzione per mostrare il messaggio di successo
@@ -158,9 +154,22 @@ document.getElementById('closeSuccess').onclick = function() {
   document.getElementById('successModal').style.display = 'none';
 }
 
+// Funzione per gestire la chiusura della modal di successo e il reindirizzamento alla pagina index.html
+document.getElementById('okSuccess').onclick = function() {
+  document.getElementById('successModal').style.display = 'none'; // Chiudi la modal
+  window.location.href = 'index.html'; // Reindirizza alla pagina index.html
+}
+
+// Funzione per chiudere la modal di errore
+document.getElementById('okError').onclick = function() {
+  document.getElementById('errorModal').style.display = 'none'; // Chiudi la modal
+}
+
+
 // Aggiungi gli eventi ai selettori
 document.getElementById('registerButton').addEventListener('click', handleRegister);
 document.getElementById('playerSelect').addEventListener('change', handlePlayerSelection);
 
 // Carica i giocatori non associati al caricamento della pagina
 window.onload = getUnassociatedPlayers;
+

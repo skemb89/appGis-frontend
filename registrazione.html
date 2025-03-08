@@ -40,9 +40,26 @@
         <button type="button" id="registerButton">Registrati</button>
       </div>
     </form>
+    
+    <!-- Modal per i messaggi di errore -->
+<div id="errorModal" class="error-modal">
+    <div class="modal-content">
+      <span id="closeError" class="close">&times;</span>
+      <p id="error-message"></p>
+      <button id="okError" class="btn">OK</button> <!-- Aggiungi il pulsante OK -->
+    </div>
+</div>
 
-    <div id="error-message" style="display: none;"></div>
-    <div id="success-message" style="display: none;"></div>
+<!-- Modal per i messaggi di successo -->
+<div id="successModal" class="success-modal">
+    <div class="modal-content">
+      <span id="closeSuccess" class="close">&times;</span>
+      <p id="success-message"></p>
+      <button id="okSuccess" class="btn">OK</button> <!-- Aggiungi il pulsante OK -->
+    </div>
+</div>
+
+  
 
     <!-- Link per tornare alla pagina di login -->
     <p>Hai già un account? <a href="index.html">Accedi</a></p>
