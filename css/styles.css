@@ -258,12 +258,58 @@ button:hover {
   background-color: #0056b3;
 }
 
-#success-message {
-  background-color: green; /* Verde per il messaggio di successo */
-  color: white;
-  padding: 10px;
+
+/*MODAL REGISTRAZIONE*/
+/* Stile del Modal di errore */
+.error-modal {
+  display: none; /* Nascondi il modal di default */
+  position: fixed; /* Rendi il modal fisso rispetto alla finestra */
+  z-index: 9999; /* Posiziona sopra gli altri elementi */
+  left: 0;
+  top: 0;
+  width: 100%; /* Larghezza del 100% della finestra */
+  height: 100%; /* Altezza del 100% della finestra */
+  overflow: auto; /* Scorrimento se necessario */
+  background-color: rgba(0, 0, 0, 0.5); /* Sfondo semitrasparente */
+}
+
+/* Stile del Modal di successo */
+.success-modal {
+  display: none; /* Nascondi il modal di default */
+  position: fixed; /* Rendi il modal fisso rispetto alla finestra */
+  z-index: 9999; /* Posiziona sopra gli altri elementi */
+  left: 0;
+  top: 0;
+  width: 100%; /* Larghezza del 100% della finestra */
+  height: 100%; /* Altezza del 100% della finestra */
+  overflow: auto; /* Scorrimento se necessario */
+  background-color: rgba(0, 0, 0, 0.5); /* Sfondo semitrasparente */
+}
+
+/* Contenuto del Modal */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Imposta una larghezza massima */
+  text-align: center;
   border-radius: 5px;
-  margin-top: 10px;
+}
+
+/* Il bottone di chiusura (X) */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 

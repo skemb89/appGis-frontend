@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Validazione e invio dei dati al server
     if (username && email && password && selectedPlayer) {
       // Esegui il submit dei dati (inviare tramite fetch o altro metodo)
-      handleRegister(username, email, password, selectedPlayer, newPlayerName); // Passa tutti i parametri
+      console.log('Registrazione effettuata con successo');
     } else {
       showErrorMessage('Tutti i campi sono obbligatori.');
     }
@@ -39,104 +39,123 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Funzione per ottenere i giocatori non associati
 async function getUnassociatedPlayers() {
-try {
-  // Chiamata API per ottenere i giocatori non associati
-  const response = await fetch('https://appgis.onrender.com/api/players/unassociated');
-  const players = await response.json();
+  try {
+    // Chiamata API per ottenere i giocatori non associati
+    const response = await fetch('https://appgis.onrender.com/api/players/unassociated');
+    const players = await response.json();
 
-  // Se ci sono giocatori non associati, aggiungili alla combo
-  const playerSelect = document.getElementById('playerSelect');
-  players.forEach(player => {
-    const option = document.createElement('option');
-    option.value = player._id; // L'ID del giocatore sarà il valore
-    option.textContent = player.nome; // Nome del giocatore
-    playerSelect.insertBefore(option, playerSelect.lastElementChild); // Inserisce prima dell'elemento "Nuovo Giocatore"
-  });
-} catch (error) {
-  console.error('Errore nel recupero dei giocatori:', error);
-  // Gestisci l'errore come preferisci
-}
+    // Se ci sono giocatori non associati, aggiungili alla combo
+    const playerSelect = document.getElementById('playerSelect');
+    players.forEach(player => {
+      const option = document.createElement('option');
+      option.value = player._id; // L'ID del giocatore sarà il valore
+      option.textContent = player.nome; // Nome del giocatore
+      playerSelect.insertBefore(option, playerSelect.lastElementChild); // Inserisce prima dell'elemento "Nuovo Giocatore"
+    });
+  } catch (error) {
+    console.error('Errore nel recupero dei giocatori:', error);
+    // Gestisci l'errore come preferisci
+  }
 }
 
 // Funzione per gestire il comportamento della combo box
 function handlePlayerSelection() {
-const playerSelect = document.getElementById('playerSelect');
-const newPlayerDiv = document.getElementById('newPlayerDiv');
-const newPlayerName = document.getElementById('newPlayerName');
+  const playerSelect = document.getElementById('playerSelect');
+  const newPlayerDiv = document.getElementById('newPlayerDiv');
+  const newPlayerName = document.getElementById('newPlayerName');
 
-// Mostra il campo per inserire un nuovo giocatore se viene selezionato "Nuovo giocatore"
-if (playerSelect.value === 'newPlayer') {
-  newPlayerDiv.style.display = 'block';
-  newPlayerName.required = true; // Rendi obbligatorio il nome del nuovo giocatore
-} else {
-  newPlayerDiv.style.display = 'none';
-  newPlayerName.required = false; // Non è più obbligatorio se non si seleziona "Nuovo giocatore"
-}
+  // Mostra il campo per inserire un nuovo giocatore se viene selezionato "Nuovo giocatore"
+  if (playerSelect.value === 'newPlayer') {
+    newPlayerDiv.style.display = 'block';
+    newPlayerName.required = true; // Rendi obbligatorio il nome del nuovo giocatore
+  } else {
+    newPlayerDiv.style.display = 'none';
+    newPlayerName.required = false; // Non è più obbligatorio se non si seleziona "Nuovo giocatore"
+  }
 }
 
 // Funzione per inviare il form di registrazione
-async function handleRegister(username, email, password, selectedPlayer, newPlayerName) {
-// Se l'utente ha scelto "Nuovo giocatore", creiamo un nuovo giocatore
-let playerId = selectedPlayer;
-if (selectedPlayer === 'newPlayer') {
-  // Aggiungiamo un nuovo giocatore
+async function handleRegister() {
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const playerSelect = document.getElementById('playerSelect').value;
+  const newPlayerName = document.getElementById('newPlayerName').value;
+
+  // Verifica che tutti i campi siano compilati
+  if (!username || !email || !password || (!playerSelect || (playerSelect === 'newPlayer' && !newPlayerName))) {
+    showErrorMessage('Tutti i campi sono obbligatori.');
+    return;
+  }
+
+  // Se l'utente ha scelto "Nuovo giocatore", creiamo un nuovo giocatore
+  let playerId = playerSelect;
+  if (playerSelect === 'newPlayer') {
+    // Aggiungiamo un nuovo giocatore
+    try {
+      const response = await fetch('https://appgis.onrender.com/api/players', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nome: newPlayerName })
+      });
+
+      const newPlayer = await response.json();
+      playerId = newPlayer._id; // Usa l'ID del nuovo giocatore
+    } catch (error) {
+      showErrorMessage('Errore durante l\'aggiunta del nuovo giocatore.');
+      return;
+    }
+  }
+
+  // Invia i dati dell'utente e il giocatore associato
   try {
-    const response = await fetch('https://appgis.onrender.com/api/players', {
+    const response = await fetch('https://appgis.onrender.com/api/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ nome: newPlayerName })
+      body: JSON.stringify({ username, email, password, giocatore: playerId })
     });
 
-    const newPlayer = await response.json();
-    playerId = newPlayer._id; // Usa l'ID del nuovo giocatore
+    if (response.ok) {
+      showSuccessMessage(username); // Passiamo il nome dell'utente per il messaggio di successo
+      setTimeout(() => {
+        window.location.href = 'index.html'; // Redirigi alla pagina di login dopo il messaggio di successo
+      }, 2000); // Attendere 2 secondi per vedere il messaggio di successo
+    } else {
+      const errorData = await response.json();
+      showErrorMessage(`Errore durante la registrazione: ${errorData.message || 'Errore sconosciuto'}`);
+    }
   } catch (error) {
-    showErrorMessage('Errore durante l\'aggiunta del nuovo giocatore.');
-    return;
+    console.error('Errore durante la registrazione:', error);
+    showErrorMessage('Errore nel server durante la registrazione.');
   }
-}
-
-// Invia i dati dell'utente e il giocatore associato
-try {
-  const response = await fetch('https://appgis.onrender.com/api/auth/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ username, email, password, giocatore: playerId })
-  });
-
-  if (response.ok) {
-    showSuccessMessage(username); // Mostra il messaggio di successo con il nome utente
-    setTimeout(() => {
-      window.location.href = 'index.html'; // Redirigi alla pagina di login dopo un breve timeout
-    }, 5000); // Timeout di 5 secondi
-  } else {
-    showErrorMessage('Errore durante la registrazione.');
-  }
-} catch (error) {
-  console.error('Errore durante la registrazione:', error);
-  showErrorMessage('Errore nel server durante la registrazione.');
-}
 }
 
 // Funzione per mostrare il messaggio di errore
 function showErrorMessage(message) {
-const errorMessage = document.getElementById('error-message');
-errorMessage.textContent = message;
-errorMessage.style.display = 'block';
+  const errorMessage = document.getElementById('error-message');
+  errorMessage.textContent = message;
+  document.getElementById('errorModal').style.display = 'block'; // Mostra il modal di errore
 }
 
 // Funzione per mostrare il messaggio di successo
 function showSuccessMessage(username) {
-const successMessage = document.getElementById('success-message');
-successMessage.textContent = `${username}, la tua registrazione è avvenuta con successo! Rimani in attesa di una mail con la conferma di ammissione da parte dell'amministratore.`;
-successMessage.style.display = 'block';
+  const successMessage = document.getElementById('success-message');
+  successMessage.textContent = `${username}, la tua registrazione è andata a buon fine! Rimani in attesa di una mail con la conferma di ammissione da parte dell'amministratore!`;
+  document.getElementById('successModal').style.display = 'block'; // Mostra il modal di successo
+}
 
-// Nascondi il messaggio di errore, se presente
-const errorMessage = document.getElementById('error-message');
-errorMessage.style.display = 'none';
+// Chiudi il modal di errore
+document.getElementById('closeError').onclick = function() {
+  document.getElementById('errorModal').style.display = 'none';
+}
+
+// Chiudi il modal di successo
+document.getElementById('closeSuccess').onclick = function() {
+  document.getElementById('successModal').style.display = 'none';
 }
 
 // Aggiungi gli eventi ai selettori
