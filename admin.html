@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+   <!-- Collegamento al Manifest -->
+   <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Header fisso in alto -->
+  <header class="fixed-header">
+    <h2 id="greeting"></h2>
+    <a href="modifica_profilo.html" class="settings-icon">⚙️</a> <!-- Icona delle impostazioni -->
+  </header>
+
+  <h1>Gestione Utenti e Giocatori</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Giocatore Associato</th>
+                <th>Azione</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody">
+            <!-- Qui verranno inseriti gli utenti dinamicamente -->
+        </tbody>
+    </table>
+
+    <button id="saveChangesButton">Salva Modifiche</button>
+
+  <!-- Menù di navigazione in basso -->
+  <nav class="bottom-menu">
+    <a href="profilo.html" class="menu-item">
+      <span class="icon">🏠</span> <!-- Casetta -->
+      <span class="text">Home</span>
+    </a>
+    <a href="lista-giochi.html" class="menu-item">
+      <span class="icon">🎲</span> <!-- Dado -->
+      <span class="text">Giochi</span>
+    </a>
+    <a href="ricerca.html" class="menu-item">
+      <span class="icon">🔍</span> <!-- Lente -->
+      <span class="text">Ricerca</span>
+    </a>
+    <a href="statistiche.html" class="menu-item">
+      <span class="icon">📊</span> <!-- Statistiche (Grafico) -->
+      <span class="text">Statistiche</span>
+    </a>
+    <a href="altro.html" class="menu-item">
+      <span class="icon">⋯</span> <!-- 3 Puntini -->
+      <span class="text">Altro</span>
+    </a>
+  </nav>
+
+  <script src="js/registrazione.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/profilo.js"></script>
+</body>
+</html>
