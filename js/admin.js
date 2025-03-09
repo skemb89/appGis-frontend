@@ -3,31 +3,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadUsers();
 });
 
-// Aggiunge un event listener al pulsante "Salva Modifiche"
-const saveButton = document.getElementById("saveChangesButton");
-if (saveButton) {
-    console.log("✅ Pulsante 'Salva Modifiche' trovato! Aggiungo l'event listener.");
-    saveButton.addEventListener("click", async () => {
-        await saveChanges();
-    });
-} else {
-    console.error("❌ ERRORE: Il pulsante 'Salva Modifiche' non è stato trovato nel DOM!");
-}
-
-/**
- * Carica gli utenti e popola la tabella con i dati.
- * Ogni riga include:
- * - Username
- * - Email
- * - Menu a tendina per scegliere il giocatore associato
- * - Menu a tendina per lo stato utente (In attesa / Approvato)
- * - Menu a tendina per il ruolo (User / Admin)
- */
 async function loadUsers() {
     try {
-        // Richiesta API per ottenere tutti gli utenti
+        // Richiesta API per ottenere gli utenti e i giocatori
         const response = await fetch("https://appgis.onrender.com/api/admin/users");
-        const users = await response.json();
+        const data = await response.json();
+        const users = data.users;
+        const players = data.players;
 
         const tableBody = document.getElementById("userTableBody");
         tableBody.innerHTML = ""; // Pulisce la tabella prima di riempirla con i nuovi dati
@@ -35,6 +17,28 @@ async function loadUsers() {
         // Itera sugli utenti per creare una riga nella tabella per ciascuno di essi
         users.forEach(user => {
             const row = document.createElement("tr");
+
+            // Creazione del menu a tendina per i giocatori associati
+            const playerSelect = document.createElement("select");
+            playerSelect.classList.add("playerSelect");
+            playerSelect.dataset.userId = user._id;
+
+            // Aggiungi l'opzione predefinita (Nessun giocatore)
+            const defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.textContent = "Nessun giocatore";
+            playerSelect.appendChild(defaultOption);
+
+            // Aggiungi tutti i giocatori al menu a tendina
+            players.forEach(player => {
+                const option = document.createElement("option");
+                option.value = player._id;
+                option.textContent = player.nome;
+                if (user.giocatore && user.giocatore._id === player._id) {
+                    option.selected = true; // Se il giocatore è già associato, selezionalo
+                }
+                playerSelect.appendChild(option);
+            });
 
             // Creazione del menu a tendina per lo stato utente
             const statusSelect = document.createElement("select");
@@ -62,20 +66,6 @@ async function loadUsers() {
                 roleSelect.appendChild(option);
             });
 
-            // Creazione del menu a tendina per i giocatori associati
-            const playerSelect = document.createElement("select");
-            playerSelect.classList.add("playerSelect");
-            playerSelect.dataset.userId = user._id;
-
-            // Opzione predefinita (nessun giocatore associato)
-            const defaultOption = document.createElement("option");
-            defaultOption.value = "";
-            defaultOption.textContent = "Nessun giocatore";
-            playerSelect.appendChild(defaultOption);
-
-            // Carica la lista dei giocatori non associati e seleziona il giocatore corretto
-            loadUnassociatedPlayers(playerSelect, user.giocatore ? user.giocatore._id : null);
-
             // Creazione della riga della tabella
             row.innerHTML = `
                 <td>${user.username}</td>
@@ -90,35 +80,11 @@ async function loadUsers() {
             row.cells[4].appendChild(roleSelect);
             tableBody.appendChild(row);
         });
-
     } catch (error) {
         console.error("❌ Errore nel caricamento degli utenti:", error);
     }
 }
 
-/**
- * Carica l'elenco dei giocatori disponibili (non ancora associati) nel menu a tendina.
- */
-async function loadUnassociatedPlayers(selectElement, selectedPlayerId) {
-    try {
-        const response = await fetch("https://appgis.onrender.com/api/admin/players/unassociated");
-        const players = await response.json();
-
-        players.forEach(player => {
-            const option = document.createElement("option");
-            option.value = player._id;
-            option.textContent = player.nome;
-            if (player._id === selectedPlayerId) option.selected = true;
-            selectElement.appendChild(option);
-        });
-    } catch (error) {
-        console.error("❌ Errore nel caricamento dei giocatori:", error);
-    }
-}
-
-/**
- * Salva le modifiche dello stato utente, del giocatore associato e del ruolo.
- */
 async function saveChanges() {
     const rows = document.querySelectorAll("#userTableBody tr");
     const updates = Array.from(rows).map(row => {
