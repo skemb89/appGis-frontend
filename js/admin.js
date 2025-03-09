@@ -19,7 +19,18 @@ async function loadUsers() {
         users.forEach(user => {
             const row = document.createElement("tr");
 
-            // Creazione del menu a tendina per i giocatori associati
+            // Creazione della cella per username
+            const usernameCell = document.createElement("td");
+            usernameCell.textContent = user.username;
+            row.appendChild(usernameCell);
+
+            // Creazione della cella per email
+            const emailCell = document.createElement("td");
+            emailCell.textContent = user.email;
+            row.appendChild(emailCell);
+
+            // Creazione della cella per il giocatore associato
+            const playerCell = document.createElement("td");
             const playerSelect = document.createElement("select");
             playerSelect.classList.add("playerSelect");
             playerSelect.dataset.userId = user._id;
@@ -41,7 +52,11 @@ async function loadUsers() {
                 playerSelect.appendChild(option);
             });
 
-            // Creazione del menu a tendina per lo stato utente
+            playerCell.appendChild(playerSelect);
+            row.appendChild(playerCell);
+
+            // Creazione della cella per lo stato
+            const statusCell = document.createElement("td");
             const statusSelect = document.createElement("select");
             statusSelect.classList.add("statusSelect");
             statusSelect.dataset.userId = user._id;
@@ -54,7 +69,11 @@ async function loadUsers() {
                 statusSelect.appendChild(option);
             });
 
-            // Creazione del menu a tendina per il ruolo utente
+            statusCell.appendChild(statusSelect);
+            row.appendChild(statusCell);
+
+            // Creazione della cella per il ruolo
+            const roleCell = document.createElement("td");
             const roleSelect = document.createElement("select");
             roleSelect.classList.add("roleSelect");
             roleSelect.dataset.userId = user._id;
@@ -67,18 +86,10 @@ async function loadUsers() {
                 roleSelect.appendChild(option);
             });
 
-            // Creazione della riga della tabella
-            row.innerHTML = `
-                <td>${user.username}</td>
-                <td>${user.email}</td>
-                <td></td> <!-- Spazio per il select dei giocatori -->
-                <td></td> <!-- Spazio per il select dello stato -->
-                <td></td> <!-- Spazio per il select del ruolo -->
-            `;
+            roleCell.appendChild(roleSelect);
+            row.appendChild(roleCell);
 
-            row.cells[2].appendChild(playerSelect);
-            row.cells[3].appendChild(statusSelect);
-            row.cells[4].appendChild(roleSelect);
+            // Aggiungi la riga alla tabella
             tableBody.appendChild(row);
         });
     } catch (error) {
