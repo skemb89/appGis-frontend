@@ -64,10 +64,10 @@ document.getElementById('loginButton').addEventListener('click', async function(
     }
 
     // Prima del reindirizzamento, aggiungiamo un piccolo timeout per vedere i log
-    setTimeout(() => {
+    //setTimeout(() => {
       // Reindirizza alla pagina del profilo
-      window.location.href = 'profilo.html';
-    }, 10000); // 2 secondi di attesa per assicurarsi che i log siano visibili prima del reindirizzamento
+    //  window.location.href = 'profilo.html';
+    //}, 10000); // 2 secondi di attesa per assicurarsi che i log siano visibili prima del reindirizzamento
 
   } catch (error) {
     console.error('Errore durante il login:', error);
