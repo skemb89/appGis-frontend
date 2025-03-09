@@ -55,3 +55,11 @@ document.getElementById('loginButton').addEventListener('click', async function(
     showError('Errore durante il login');
   }
 });
+
+
+// Funzione per mostrare un errore all'utente
+function showError(message) {
+  const errorElement = document.getElementById('error-message'); // Assicurati di avere un elemento HTML con l'id 'error-message'
+  errorElement.textContent = message;
+  errorElement.style.display = 'block'; // Mostra il messaggio di errore
+}
