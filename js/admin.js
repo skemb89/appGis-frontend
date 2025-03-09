@@ -27,6 +27,7 @@ async function loadUsers() {
             // Creazione della cella per email
             const emailCell = document.createElement("td");
             emailCell.textContent = user.email;
+            console.log("Email per l'utente", user.username, ":", user.email); // Log per verificare
             row.appendChild(emailCell);
 
             // Creazione della cella per il giocatore associato
@@ -81,7 +82,7 @@ async function loadUsers() {
             ["user", "admin"].forEach(role => {
                 const option = document.createElement("option");
                 option.value = role;
-                option.textContent = role.charAt(0).toUpperCase() + role.slice(1); // Mostra "User" e "Admin" con maiuscola iniziale
+                option.textContent = role; // Mostra "User" e "Admin" con maiuscola iniziale
                 if (user.role === role) option.selected = true;
                 roleSelect.appendChild(option);
             });
@@ -146,3 +147,10 @@ async function saveChanges() {
         console.error("❌ Errore nel salvataggio:", error);
     }
 }
+
+// Controlla se l'utente ha il ruolo di 'admin'
+if (localStorage.getItem('role') !== 'admin') {
+    // Se non è 'admin', reindirizza alla pagina di accesso negato
+    window.location.href = 'accesso-negato.html'; 
+  }
+  

@@ -1,19 +1,3 @@
-// Funzione per mostrare il messaggio di errore
-function showError(message) {
-  const errorMessage = document.getElementById('error-message');
-  errorMessage.textContent = message;
-  errorMessage.style.display = 'block';  // Mostra il messaggio
-  errorMessage.style.opacity = '1';  // Rende visibile il messaggio
-
-  // Nasconde il messaggio dopo 3 secondi
-  setTimeout(() => {
-    errorMessage.style.opacity = '0';  // Fa svanire il messaggio
-    setTimeout(() => {
-      errorMessage.style.display = 'none';  // Nasconde il messaggio dopo l'animazione
-    }, 500);
-  }, 3000);
-}
-
 // Event listener per il pulsante di login
 document.getElementById('loginButton').addEventListener('click', async function() {
   const username = document.getElementById('username').value;
@@ -30,14 +14,21 @@ document.getElementById('loginButton').addEventListener('click', async function(
     const data = await response.json();
 
     if (response.status !== 200) {
-      showError(data.message || 'Errore nel login');
+      if (response.status === 403) {
+        // Caso in cui l'utente non è approvato
+        showError('L\'utente non è stato ancora approvato.');
+      } else {
+        // Gestione errore per credenziali non valide
+        showError(data.message || 'Errore nel login');
+      }
       return;
     }
 
-    // Salva il token, il nome utente e l'ID utente in localStorage
+    // Salva il token, il nome utente, l'ID utente e il ruolo in localStorage
     localStorage.setItem('token', data.token);
     localStorage.setItem('username', username);
     localStorage.setItem('userId', data.userId); // Memorizza l'ID del giocatore
+    localStorage.setItem('role', data.role); // Memorizza il ruolo
 
     // Ora recuperiamo il nome del giocatore associato all'utente
     const giocatoreResponse = await fetch('https://appgis.onrender.com/api/auth/giocatore', {
@@ -64,4 +55,3 @@ document.getElementById('loginButton').addEventListener('click', async function(
     showError('Errore durante il login');
   }
 });
-
