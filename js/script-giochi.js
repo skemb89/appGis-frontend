@@ -35,7 +35,8 @@ async function getGamesForPlayer(playerId) {
 
             // Inserisci solo il nome e la tipologia
             row.insertCell(0).textContent = gioco.nome;
-            row.insertCell(1).textContent = gioco.tipologia ? gioco.tipologia.nome : 'N/A'; // Mostra il nome della tipologia
+            row.insertCell(1).textContent = gioco.tipologia || 'N/A'; // Mostra il nome della tipologia
+
         });
     } catch (error) {
         console.error('Errore nel recuperare i giochi:', error);

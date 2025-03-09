@@ -98,3 +98,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// Funzione di logout quando si clicca sui tre puntini nel bottom menu
+const logoutMenu = document.getElementById("logoutMenu");
+if (logoutMenu) {
+  logoutMenu.addEventListener("click", function (e) {
+    e.preventDefault(); // Evita che il link venga seguito
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("giocatoreNome"); // Rimuovi anche il nome del giocatore dal localStorage
+    window.location.href = "index.html"; // Redirect alla pagina di login
+  });
+}
