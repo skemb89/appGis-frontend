@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadUsers();
 });
 
+// Funzione per caricare gli utenti
 async function loadUsers() {
     try {
         // Richiesta API per ottenere gli utenti e i giocatori
@@ -85,6 +86,18 @@ async function loadUsers() {
     }
 }
 
+// Aggiungi un listener per il pulsante "Salva Modifiche"
+const saveButton = document.getElementById("saveChanges");
+if (saveButton) {
+    saveButton.addEventListener("click", async () => {
+        console.log("✅ Pulsante 'Salva Modifiche' cliccato!");
+        await saveChanges();
+    });
+} else {
+    console.error("❌ ERRORE: Il pulsante 'Salva Modifiche' non è stato trovato nel DOM!");
+}
+
+// Funzione per salvare le modifiche
 async function saveChanges() {
     const rows = document.querySelectorAll("#userTableBody tr");
     const updates = Array.from(rows).map(row => {
@@ -93,11 +106,16 @@ async function saveChanges() {
         const status = row.querySelector(".statusSelect").value;
         const role = row.querySelector(".roleSelect").value;
 
+        // Log per il debug: visualizza i dati che vengono inviati
+        console.log('User ID:', userId, 'Player ID:', playerId, 'Status:', status, 'Role:', role);
+
         return { userId, playerId, status, role };
     });
 
     try {
+        // Itera sugli aggiornamenti e invia la richiesta PUT per ciascun utente
         for (const update of updates) {
+            console.log("Aggiornando utente:", update); // Log per il debug
             const response = await fetch(`https://appgis.onrender.com/api/admin/users/${update.userId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
@@ -105,6 +123,7 @@ async function saveChanges() {
             });
 
             if (!response.ok) {
+                console.error("❌ Errore nel salvataggio delle modifiche.");
                 alert("❌ Errore nel salvataggio delle modifiche.");
                 return;
             }
