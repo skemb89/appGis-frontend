@@ -150,12 +150,19 @@ async function saveChanges() {
 }
 
 
-// Funzione per controllare se l'utente ha il ruolo di 'admin'
+// Funzione per controllare se l'utente ha il ruolo di 'admin' o 'user'
 function checkUserRole() {
     const role = localStorage.getItem('role');
     console.log("Ruolo dell'utente:", role); // Log per il controllo del ruolo
 
-    if (role !== 'admin') {
-        window.location.href = 'accesso-negato.html'; // Reindirizza se non è admin
+    if (role === 'admin') {
+        // Se il ruolo è 'admin', non fare nulla (o reindirizza alla pagina admin, se necessario)
+        console.log('Utente admin: continua la navigazione');
+    } else if (role === 'user') {
+        // Se il ruolo è 'user', reindirizza alla pagina 'modifica_profilo.html'
+        window.location.href = 'modifica_profilo.html'; 
+    } else {
+        // Se non è né admin né user (nel caso ci siano altri ruoli o problemi)
+        window.location.href = 'accesso-negato.html'; // Reindirizza alla pagina di accesso negato
     }
 }

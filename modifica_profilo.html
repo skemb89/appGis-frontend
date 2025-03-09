@@ -9,30 +9,12 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<!-- Header fisso in alto -->
+<header class="fixed-header">
+  <h2>Modifica</h2>
+  <a href="modifica_profilo.html" class="settings-icon">⚙️</a> <!-- Icona delle impostazioni -->
+</header>
 
-  <!-- Bottone hamburger per dispositivi mobili -->
-  <button class="hamburger" id="hamburger">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </button>
-  
-  <!-- Sidebar con il menu di navigazione -->
-  <div class="sidebar" id="sidebar">
-    <!-- Nome dell'utente visibile sempre -->
-    <div class="user-info" id="user-info"></div>
-
-    <!-- Menu -->
-    <ul class="menu-list">
-      <li><a href="profilo.html">Profilo</a></li>
-      <li><a href="modifica_profilo.html">Modifica Profilo</a></li>
-      <li><a href="lista-giochi.html">Lista Giochi</a></li>
-      <li><a href="statistiche.html">Statistiche</a></li>
-    </ul>
-
-    <!-- Logout -->
-    <button id="logout" class="logout-btn">Logout</button>
-  </div>
 
   <!-- Contenuto principale -->
   <div class="main-content">
@@ -66,8 +48,33 @@
     </div>
   </div>
 
+<!-- Menù di navigazione in basso -->
+<nav class="bottom-menu">
+  <a href="profilo.html" class="menu-item">
+    <span class="icon">🏠</span> <!-- Casetta -->
+    <span class="text">Home</span>
+  </a>
+  <a href="lista-giochi.html" class="menu-item">
+    <span class="icon">🎲</span> <!-- Dado -->
+    <span class="text">Giochi</span>
+  </a>
+  <a href="ricerca.html" class="menu-item">
+    <span class="icon">🔍</span> <!-- Lente -->
+    <span class="text">Ricerca</span>
+  </a>
+  <a href="statistiche.html" class="menu-item">
+    <span class="icon">📊</span> <!-- Statistiche (Grafico) -->
+    <span class="text">Statistiche</span>
+  </a>
+  <a href="altro.html" class="menu-item">
+    <span class="icon">⋯</span> <!-- 3 Puntini -->
+    <span class="text">Altro</span>
+  </a>
+</nav>
+
+
   <script src="js/modifica_profilo.js"></script>
   <script src="js/profile.js"></script>
-  <script src="js/menu.js"></script>
+  
 </body>
 </html>

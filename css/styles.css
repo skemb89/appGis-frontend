@@ -183,17 +183,17 @@ button.login-button:hover {
   background-color: #0056b3;
 }
 
-/* Stile per il messaggio di errore */
 #error-message {
   color: white;
   background-color: red;
   padding: 10px;
   border-radius: 5px;
   margin-top: 10px;
-  display: none;
-  opacity: 0;
+  display: block;  /* Cambiato da none a block per essere sempre visibile */
+  opacity: 0;      /* Inizialmente visibile */
   transition: opacity 0.5s ease-in-out;
 }
+
 
 /* Stile per il link di registrazione */
 .login-box p {

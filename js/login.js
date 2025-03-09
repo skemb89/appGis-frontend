@@ -15,10 +15,13 @@ document.getElementById('loginButton').addEventListener('click', async function(
     // Log della risposta del server per verificare i dati ricevuti
     console.log("Risposta del server:", data);
 
+    // Controlla la risposta
     if (response.status !== 200) {
       if (response.status === 403) {
+        console.log("Errore: L'utente non è stato ancora approvato.");
         showError('L\'utente non è stato ancora approvato.');
       } else {
+        console.log('Errore generico:', data.message || 'Errore nel login');
         showError(data.message || 'Errore nel login');
       }
       return;
@@ -63,11 +66,11 @@ document.getElementById('loginButton').addEventListener('click', async function(
       localStorage.setItem('giocatoreNome', 'Nessun giocatore associato');
     }
 
-    // Prima del reindirizzamento, aggiungiamo un piccolo timeout per vedere i log
-    //setTimeout(() => {
-      // Reindirizza alla pagina del profilo
-    //  window.location.href = 'profilo.html';
-    //}, 10000); // 2 secondi di attesa per assicurarsi che i log siano visibili prima del reindirizzamento
+    //Prima del reindirizzamento, aggiungiamo un piccolo timeout per vedere i log
+    setTimeout(() => {
+       //Reindirizza alla pagina del profilo
+      window.location.href = 'profilo.html';
+    }, 100); // 2 secondi di attesa per assicurarsi che i log siano visibili prima del reindirizzamento
 
   } catch (error) {
     console.error('Errore durante il login:', error);
@@ -80,4 +83,5 @@ function showError(message) {
   const errorElement = document.getElementById('error-message'); // Assicurati di avere un elemento HTML con l'id 'error-message'
   errorElement.textContent = message;
   errorElement.style.display = 'block'; // Mostra il messaggio di errore
+  errorElement.style.opacity = '1'; // Assicurati che l'errore sia visibile
 }
