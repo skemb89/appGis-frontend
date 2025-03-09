@@ -1,5 +1,6 @@
 // Quando il documento è completamente caricato, carica gli utenti
 document.addEventListener("DOMContentLoaded", async () => {
+    checkUserRole(); // Controlla il ruolo dell'utente
     await loadUsers();
 });
 
@@ -148,9 +149,13 @@ async function saveChanges() {
     }
 }
 
-// Controlla se l'utente ha il ruolo di 'admin'
-if (localStorage.getItem('role') !== 'admin') {
-    // Se non è 'admin', reindirizza alla pagina di accesso negato
-    window.location.href = 'accesso-negato.html'; 
-  }
-  
+
+// Funzione per controllare se l'utente ha il ruolo di 'admin'
+function checkUserRole() {
+    const role = localStorage.getItem('role');
+    console.log("Ruolo dell'utente:", role); // Log per il controllo del ruolo
+
+    if (role !== 'admin') {
+        window.location.href = 'accesso-negato.html'; // Reindirizza se non è admin
+    }
+}
